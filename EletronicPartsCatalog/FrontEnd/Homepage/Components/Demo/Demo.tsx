@@ -6,7 +6,7 @@ class Demo extends React.Component<any, any>{
 	public render(){
 	return ( 
 	<div className="Demo">
-	<p>ASP.NET + React, from Jamile </p>
+	<p>ASP.NET + React test</p>
 	</div>
 	)
   }
