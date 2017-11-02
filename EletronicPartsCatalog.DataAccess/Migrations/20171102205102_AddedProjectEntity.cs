@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 
-namespace EletronicPartsCatalog.Data.Migrations
+namespace EletronicPartsCatalog.DataAccess.Migrations
 {
     public partial class AddedProjectEntity : Migration
     {

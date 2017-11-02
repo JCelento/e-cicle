@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using EletronicPartsCatalog.Data;
+using EletronicPartsCatalog.DataAccess.Models;
 using EletronicPartsCatalog.Services;
 
 namespace EletronicPartsCatalog.Pages.Account

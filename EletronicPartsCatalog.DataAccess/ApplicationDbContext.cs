@@ -1,11 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using EletronicPartsCatalog.DataAccess.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace EletronicPartsCatalog.Data
+namespace EletronicPartsCatalog.DataAccess
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {

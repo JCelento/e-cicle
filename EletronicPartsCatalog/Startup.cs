@@ -5,7 +5,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using EletronicPartsCatalog.Data;
+using EletronicPartsCatalog.DataAccess.Models;
+using EletronicPartsCatalog.DataAccess;
 using EletronicPartsCatalog.Services;
 
 namespace EletronicPartsCatalog
