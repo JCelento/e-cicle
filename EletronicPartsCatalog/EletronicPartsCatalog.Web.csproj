@@ -4,6 +4,12 @@
     <UserSecretsId>aspnet-EletronicPartsCatalog-812F5A76-FB7D-428A-9B83-45E181447570</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="FrontEnd\Homepage\**" />
+    <Content Remove="FrontEnd\Homepage\**" />
+    <EmbeddedResource Remove="FrontEnd\Homepage\**" />
+    <None Remove="FrontEnd\Homepage\**" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices" Version="2.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.0" PrivateAssets="All" />
@@ -13,9 +19,6 @@
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0" />
     <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.0" />
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="FrontEnd\Homepage\Components\Demo\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EletronicPartsCatalog.DataAccess\EletronicPartsCatalog.DataAccess.csproj" />
