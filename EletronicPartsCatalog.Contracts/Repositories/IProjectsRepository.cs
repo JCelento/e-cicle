@@ -9,5 +9,6 @@ namespace EletronicPartsCatalog.Contracts.Repositories
        ProjectDto GetById(int id);
        void Add(AddProjectDto project);
        ProjectDto GetByName(string projectName);
+       void Delete(int id);
     }
 }

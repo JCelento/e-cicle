@@ -9,5 +9,6 @@ namespace EletronicPartsCatalog.Contracts.Services
         List<ProjectDto> GetAll();
         CommonResult<ProjectDto> GetById(int id);
         CommonResult Add(AddProjectDto project);
+        void Delete(int id);
     }
 }

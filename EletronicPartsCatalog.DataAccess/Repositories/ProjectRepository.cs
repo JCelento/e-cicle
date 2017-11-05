@@ -66,5 +66,12 @@ namespace EletronicPartsCatalog.DataAccess.Repositories
 
             return null;
         }
+
+        public void Delete(int id) {
+            var project = _dbContext.Projects.First(x => x.Id == id);
+            project.IsDeleted = true;
+
+            _dbContext.SaveChanges();
+        }
     }
 }
