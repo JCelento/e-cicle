@@ -21,6 +21,8 @@ namespace EletronicPartsCatalog.DataAccess
             // Add your customizations after calling base.OnModelCreating(builder);
 
             builder.Entity<Project>().HasKey(k => k.Id);
+            builder.Entity<Project>().Property(x => x.Name)
+                         .IsRequired();
         }
     }
 }
