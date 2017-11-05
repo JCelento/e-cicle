@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2002
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EletronicPartsCatalog", "EletronicPartsCatalog\EletronicPartsCatalog.csproj", "{7583A367-BA89-4DFE-AC69-2051472DB3DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EletronicPartsCatalog.Web", "EletronicPartsCatalog\EletronicPartsCatalog.Web.csproj", "{7583A367-BA89-4DFE-AC69-2051472DB3DD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EletronicPartsCatalog.DataAccess", "EletronicPartsCatalog.DataAccess\EletronicPartsCatalog.DataAccess.csproj", "{DF58EDAC-B511-4724-9BBC-9222D2509112}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EletronicPartsCatalog.Contracts", "EletronicPartsCatalog.Contracts\EletronicPartsCatalog.Contracts.csproj", "{7F3DF770-3C36-428E-A6BF-330D3097485B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EletronicPartsCatalog.Services", "EletronicPartsCatalog.Services\EletronicPartsCatalog.Services.csproj", "{7A5D1FC0-3997-49C1-A7DB-0D0D9163BBA5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +21,18 @@ Global
 		{7583A367-BA89-4DFE-AC69-2051472DB3DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7583A367-BA89-4DFE-AC69-2051472DB3DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7583A367-BA89-4DFE-AC69-2051472DB3DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF58EDAC-B511-4724-9BBC-9222D2509112}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF58EDAC-B511-4724-9BBC-9222D2509112}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF58EDAC-B511-4724-9BBC-9222D2509112}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF58EDAC-B511-4724-9BBC-9222D2509112}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F3DF770-3C36-428E-A6BF-330D3097485B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F3DF770-3C36-428E-A6BF-330D3097485B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F3DF770-3C36-428E-A6BF-330D3097485B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F3DF770-3C36-428E-A6BF-330D3097485B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A5D1FC0-3997-49C1-A7DB-0D0D9163BBA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A5D1FC0-3997-49C1-A7DB-0D0D9163BBA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A5D1FC0-3997-49C1-A7DB-0D0D9163BBA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A5D1FC0-3997-49C1-A7DB-0D0D9163BBA5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

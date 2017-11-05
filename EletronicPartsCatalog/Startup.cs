@@ -5,8 +5,13 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using EletronicPartsCatalog.Data;
+using EletronicPartsCatalog.DataAccess.Models;
+using EletronicPartsCatalog.DataAccess;
 using EletronicPartsCatalog.Services;
+using EletronicPartsCatalog.Contracts.Repositories;
+using EletronicPartsCatalog.DataAccess.Repositories;
+using EletronicPartsCatalog.Services.Services;
+using EletronicPartsCatalog.Contracts.Services;
 
 namespace EletronicPartsCatalog
 {
@@ -39,6 +44,8 @@ namespace EletronicPartsCatalog
             // Register no-op EmailSender used by account confirmation and password reset during development
             // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=532713
             services.AddSingleton<IEmailSender, EmailSender>();
+            services.AddScoped<IProjectsRepository, ProjectsRepository>();  
+            services.AddScoped<IProjectsService, ProjectsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

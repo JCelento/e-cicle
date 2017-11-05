@@ -17,4 +17,8 @@
   <ItemGroup>
     <Folder Include="FrontEnd\Homepage\Components\Demo\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EletronicPartsCatalog.DataAccess\EletronicPartsCatalog.DataAccess.csproj" />
+    <ProjectReference Include="..\EletronicPartsCatalog.Services\EletronicPartsCatalog.Services.csproj" />
+  </ItemGroup>
 </Project>
