@@ -1,10 +1,9 @@
-﻿using EletronicPartsCatalog.Contracts.Services;
+﻿using EletronicPartsCatalog.Contracts.DataContracts;
+using EletronicPartsCatalog.Contracts.Services;
+using EletronicPartsCatalog.Web.Pages.Models;
+using EletronicPartsCatalog.Web.Pages.Projects;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace EletronicPartsCatalog.Web.Controllers
 {
@@ -19,6 +18,36 @@ namespace EletronicPartsCatalog.Web.Controllers
         [HttpGet]
         public IActionResult Index() {
             return View();
+        }
+
+        [HttpGet]
+        public IActionResult Add() {
+            return View(new ProjectCreateViewModel());
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Add(ProjectCreateViewModel viewModel) {
+            var result = _projectsService.Add(new AddProjectDto {
+                Name = viewModel.Name,
+                Description = viewModel.Description
+            });
+
+            if (result.IsSuccess) {
+                return RedirectToAction(nameof(ProjectsController.Index), "Projects");
+            } else {
+                viewModel.ErrorMessage = result.ErrorMessage;
+                return View(viewModel);
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(int id) {
+            _projectsService.Delete(id);
+
+            return RedirectToAction(nameof(ProjectsController.Index), "Projects");
         }
     }
 }

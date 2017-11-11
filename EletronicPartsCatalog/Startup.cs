@@ -12,6 +12,7 @@ using EletronicPartsCatalog.Contracts.Repositories;
 using EletronicPartsCatalog.DataAccess.Repositories;
 using EletronicPartsCatalog.Services.Services;
 using EletronicPartsCatalog.Contracts.Services;
+using Newtonsoft.Json.Serialization;
 
 namespace EletronicPartsCatalog
 {
@@ -35,11 +36,15 @@ namespace EletronicPartsCatalog
                 .AddDefaultTokenProviders();
 
             services.AddMvc()
-                .AddRazorPagesOptions(options =>
-                {
+                .AddRazorPagesOptions(options => {
                     options.Conventions.AuthorizeFolder("/Account/Manage");
                     options.Conventions.AuthorizePage("/Account/Logout");
+                })
+                .AddJsonOptions(options => {
+                    options.SerializerSettings.ContractResolver = new DefaultContractResolver();
                 });
+                  
+
 
             // Register no-op EmailSender used by account confirmation and password reset during development
             // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=532713

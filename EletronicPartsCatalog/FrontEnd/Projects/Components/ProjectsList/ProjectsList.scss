@@ -1,0 +1,5 @@
+@import '../../../Shared/Styles/fonts.scss';
+
+.ProjectsList {
+    @include custom-font();
+}

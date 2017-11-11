@@ -5,7 +5,13 @@
 }
 
 <p>Projects list</p>
+<div id="react-root"></div>
+
+@section Styles {
+    <link href="~/dist/styles/projects.css" rel="stylesheet" />
+}
 
 @section Scripts {
+    <script src="~/dist/projects.js"></script>
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

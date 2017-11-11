@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EletronicPartsCatalog.DataA
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EletronicPartsCatalog.Contracts", "EletronicPartsCatalog.Contracts\EletronicPartsCatalog.Contracts.csproj", "{7F3DF770-3C36-428E-A6BF-330D3097485B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EletronicPartsCatalog.Services", "EletronicPartsCatalog.Services\EletronicPartsCatalog.Services.csproj", "{7A5D1FC0-3997-49C1-A7DB-0D0D9163BBA5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EletronicPartsCatalog.Services", "EletronicPartsCatalog.Services\EletronicPartsCatalog.Services.csproj", "{7A5D1FC0-3997-49C1-A7DB-0D0D9163BBA5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
