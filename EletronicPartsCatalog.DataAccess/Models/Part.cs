@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
-namespace EletronicPartsCatalog.Contracts.DataContracts
+namespace EletronicPartsCatalog.DataAccess.Models
 {
-    public class ProjectDto
+    public class Part
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public List<PartDto> Parts { get; set; }
+        public List<Object> Objects { get; set; }
         public bool IsDeleted { get; set; }
         public DateTime CreationDate { get; set; }
-        public string CreatedBy { get; set; }
+        public ApplicationUser CreatedBy { get; set; }
     }
 }

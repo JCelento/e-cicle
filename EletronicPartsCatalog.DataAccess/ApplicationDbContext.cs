@@ -7,6 +7,9 @@ namespace EletronicPartsCatalog.DataAccess
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public DbSet<Project> Projects { get; set; }
+        public DbSet<Object> Objects { get; set; }
+        public DbSet<Part> Parts { get; set; }
+
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -16,13 +19,18 @@ namespace EletronicPartsCatalog.DataAccess
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            // Customize the ASP.NET Identity model and override the defaults if needed.
-            // For example, you can rename the ASP.NET Identity table names and more.
-            // Add your customizations after calling base.OnModelCreating(builder);
 
-            builder.Entity<Project>().HasKey(k => k.Id);
-            builder.Entity<Project>().Property(x => x.Name)
+            builder.Entity<Project>().HasKey(p => p.Id);
+            builder.Entity<Project>().Property(p => p.Name)
                          .IsRequired();
+            builder.Entity<Project>().HasMany(p => p.Parts);
+            builder.Entity<Object>().HasKey(o => o.Id);
+            builder.Entity<Object>().HasMany(o => o.Parts);
+            builder.Entity<Part>().HasKey(p => p.Id);
+            builder.Entity<Part>().HasMany(p => p.Objects);
+
+
+
         }
     }
 }

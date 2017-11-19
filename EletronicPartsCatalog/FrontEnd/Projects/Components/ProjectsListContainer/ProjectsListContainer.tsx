@@ -12,7 +12,7 @@ interface ProjectsListContainerState {
 class ProjectsListContainer extends React.Component<any, ProjectsListContainerState> {
 
     private paths = {
-        fetchAllProjects: '/Api/Projects'
+        fetchAllProjects: '/api/Projects'
     };
 
     constructor() {

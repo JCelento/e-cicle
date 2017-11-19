@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace EletronicPartsCatalog.Contracts.DataContracts
 {
-    public class ProjectDto
+    public class ObjectDto
     {
         public int Id { get; set; }
         public string Name { get; set; }
