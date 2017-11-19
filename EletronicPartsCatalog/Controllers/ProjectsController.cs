@@ -49,5 +49,18 @@ namespace EletronicPartsCatalog.Web.Controllers
 
             return RedirectToAction(nameof(ProjectsController.Index), "Projects");
         }
+
+        [HttpGet]
+        public IActionResult Details(int id) {
+            var result = _projectsService.GetById(id);
+
+            return View(new ProjectViewModel() {
+                Id = result.Item.Id,
+                Name = result.Item.Name,
+                Description = result.Item.Description,
+                CreationDate = result.Item.CreationDate.Date.ToString("dd-MM-yyyy")
+            });
+        }
+
     }
 }
