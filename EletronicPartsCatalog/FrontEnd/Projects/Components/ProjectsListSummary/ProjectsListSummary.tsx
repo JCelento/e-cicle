@@ -19,10 +19,10 @@ class ProjectsListSummary extends React.Component<ProjectsListProps, any> {
                 <div className='ProjectsList-summary col-md-12'>
                     <div className='row'>
                         <div className='col-md-6'>
-                            <p className='ProjectList-summaryText'>Number of projects: <strong>{this.props.projects.length}</strong></p>
+                            <p className='ProjectList-summaryText'>Número de Projetos: <strong>{this.props.projects.length}</strong></p>
                         </div>
                         <div className='col-md-6'>
-                            <Button link={true} href={this.paths.createProjectUrl} extraClassNames={['btn-success', 'pull-right']}>Start new project</Button>
+                            <Button link={true} href={this.paths.createProjectUrl} extraClassNames={['btn-success', 'pull-right']}>Criar projeto</Button>
                         </div>
                     </div>
                 </div>
