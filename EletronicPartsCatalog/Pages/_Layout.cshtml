@@ -29,7 +29,7 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     @if (SignInManager.IsSignedIn(User)) {
-                        <li><a asp-controller="Projects" asp-action="Index">Projects</a></li>
+                        <li><a asp-controller="Projects" asp-action="Index">Projetos</a></li>
                     }
                 </ul>
                 @await Html.PartialAsync("_LoginPartial")

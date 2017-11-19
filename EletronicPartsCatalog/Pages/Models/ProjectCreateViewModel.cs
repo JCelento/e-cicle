@@ -10,6 +10,8 @@ namespace EletronicPartsCatalog.Web.Pages.Models
         [Required]
         public string Description { get; set; }
 
+        public string CreatedBy { get; set; }
+
         public string ErrorMessage { get; set; }
     }
 }
