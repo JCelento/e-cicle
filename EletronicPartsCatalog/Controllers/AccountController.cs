@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using EletronicPartsCatalog.DataAccess.Models;
+using EletronicPartsCatalog.Web.Controllers;
 
 namespace EletronicPartsCatalog.Controllers
 {

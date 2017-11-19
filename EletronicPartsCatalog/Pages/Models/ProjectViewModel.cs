@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace EletronicPartsCatalog.Contracts.DataContracts
+namespace EletronicPartsCatalog.Web.Pages.Models
 {
-    public class ProjectDto
+    public class ProjectViewModel
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public List<PartDto> Parts { get; set; }
-        public bool IsDeleted { get; set; }
-        public DateTime CreationDate { get; set; }
+        public string CreationDate { get; set; }
         public string CreatedBy { get; set; }
+
     }
 }

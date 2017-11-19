@@ -9,13 +9,14 @@ const paths = {
 
 const config = {
         entry: {
-    homepage: './FrontEnd/Homepage/index.tsx',
+        	home: './FrontEnd/Home/home.scss',
+            projects: './FrontEnd/Projects/index.tsx',
     libs: [
         'bootstrap', 
         'bootstrap/dist/css/bootstrap.css', 
+        'jquery',
         'react',
-        'react-dom', 
-        'jquery'
+        'react-dom'
     ]
 },
         output: {
