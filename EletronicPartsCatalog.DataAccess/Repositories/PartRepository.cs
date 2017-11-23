@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using EletronicPartsCatalog.Contracts.DataContracts;
+using EletronicPartsCatalog.Contracts.Repositories;
+using EletronicPartsCatalog.DataAccess.Models;
 
 namespace EletronicPartsCatalog.DataAccess.Repositories
 {
-    public class PartRepository
+    public class PartsRepository : IPartsRepository
     {
         private readonly ApplicationDbContext _dbContext;
 
-        public PartRepository(ApplicationDbContext dbContext) {
+        public PartsRepository(ApplicationDbContext dbContext) {
             _dbContext = dbContext;
         }
 
@@ -42,7 +43,16 @@ namespace EletronicPartsCatalog.DataAccess.Repositories
             };
         }
 
-        //Create method for adding an object
+        public void Add(AddPartDto part) {
+            _dbContext.Parts.Add(new Part {
+                Name = part.Name,
+                Description = part.Description,
+                IsDeleted = false,
+                CreationDate = DateTime.Now
+            });
+
+            _dbContext.SaveChanges();
+        }
 
         public PartDto GetByName(string partName) {
             var existingPart = _dbContext.Parts.FirstOrDefault(x => x.Name.ToLower() == partName.ToLower());

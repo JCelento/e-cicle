@@ -1,14 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using EletronicPartsCatalog.Contracts.DataContracts;
+using EletronicPartsCatalog.Contracts.Repositories;
+using Object = EletronicPartsCatalog.DataAccess.Models.Object;
 
 namespace EletronicPartsCatalog.DataAccess.Repositories
 {
-    public class ObjectRepository
+    public class ObjectsRepository : IObjectsRepository
     {
         private readonly ApplicationDbContext _dbContext;
 
-        public ObjectRepository(ApplicationDbContext dbContext) {
+        public ObjectsRepository(ApplicationDbContext dbContext) {
             _dbContext = dbContext;
         }
 
@@ -42,7 +45,17 @@ namespace EletronicPartsCatalog.DataAccess.Repositories
             };
         }
 
-        //Create method for adding an object
+        public void Add(AddObjectDto obj) {
+            _dbContext.Objects.Add(new Object {
+                Name = obj.Name,
+                Description = obj.Description,
+                IsDeleted = false,
+                CreationDate = DateTime.Now,
+                Parts = obj.Parts
+            });
+
+            _dbContext.SaveChanges();
+        }
 
         public ObjectDto GetByName(string objectName) {
             var existingObject = _dbContext.Objects.FirstOrDefault(x => x.Name.ToLower() == objectName.ToLower());
