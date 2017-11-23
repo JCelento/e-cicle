@@ -18,13 +18,13 @@ class EmptyListWarning extends React.Component<any, any>{
 		<p className='text-center'>It looks like you don't have any projects created.</p>
 		<p className='text-center'>
 	 <Button link={true} href={this.paths.createProjectUrl} extraClassNames={['btn-success']}>
-                            Create first project
-                        </Button>
-                    </p>
-                </section>
-            </section>
-        )
-    }
+							Create first project
+						</Button>
+					</p>
+				</section>
+			</section>
+		)
+	}
 }
 
 export default EmptyListWarning;
