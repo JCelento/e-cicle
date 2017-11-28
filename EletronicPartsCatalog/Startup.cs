@@ -49,7 +49,9 @@ namespace EletronicPartsCatalog
             // Register no-op EmailSender used by account confirmation and password reset during development
             // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=532713
             services.AddSingleton<IEmailSender, EmailSender>();
-            services.AddScoped<IProjectsRepository, ProjectsRepository>();  
+            services.AddScoped<IProjectsRepository, ProjectsRepository>();
+            services.AddScoped<IObjectsRepository, ObjectsRepository>();
+            services.AddScoped<IPartsRepository, PartsRepository>();
             services.AddScoped<IProjectsService, ProjectsService>();
         }
 

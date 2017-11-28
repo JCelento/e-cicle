@@ -45,7 +45,8 @@ namespace EletronicPartsCatalog.DataAccess.Repositories
                 Name = project.Name,
                 Description = project.Description,
                 IsDeleted = false,
-                CreationDate = DateTime.Now
+                CreationDate = DateTime.Now,
+                Parts = project.Parts
             });
 
             _dbContext.SaveChanges();

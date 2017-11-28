@@ -15,7 +15,7 @@ class EmptyListWarning extends React.Component<any, any>{
         <section className='EmptyListWarning'>
         <img className='center-block' src='/images/List.png' />
         <section className='EmptyListWarning-textContainer'>
-        <p className='text-center'>Ainda n„o temos nenhum projeto criado :(</p>
+        <p className='text-center'>Ainda n√£o temos nenhum projeto criado :(</p>
         <p className='text-center'>
      <Button link={true} href={this.paths.createProjectUrl} extraClassNames={['btn-success']}>
                             Criar um projeto
