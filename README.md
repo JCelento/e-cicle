@@ -6,3 +6,4 @@ Foram utilizados no desenvolvimento
 - Typescript
 - React
 - SQLExpress e SQL Server Management Studio https://www.microsoft.com/en-us/download/confirmation.aspx?id=42299
+- Jest e Enzyme
