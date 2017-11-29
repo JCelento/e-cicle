@@ -25,4 +25,15 @@
     <ProjectReference Include="..\EletronicPartsCatalog.DataAccess\EletronicPartsCatalog.DataAccess.csproj" />
     <ProjectReference Include="..\EletronicPartsCatalog.Services\EletronicPartsCatalog.Services.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Update="Views\Objects\_Layout.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\Parts\_Layout.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\Projects\_Layout.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
 </Project>

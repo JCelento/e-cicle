@@ -1,0 +1,14 @@
+﻿using System.Collections.Generic;
+using EletronicPartsCatalog.Contracts.Common;
+using EletronicPartsCatalog.Contracts.DataContracts;
+
+namespace EletronicPartsCatalog.Contracts.Services
+{
+    public interface IPartsService
+    {
+        List<PartDto> GetAll();
+        CommonResult<PartDto> GetById(int id);
+        CommonResult Add(AddPartDto project);
+        void Delete(int id);
+    }
+}

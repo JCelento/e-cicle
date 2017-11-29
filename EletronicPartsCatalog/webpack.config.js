@@ -11,6 +11,9 @@ const config = {
         entry: {
         	home: './FrontEnd/Home/home.scss',
             projects: './FrontEnd/Projects/index.tsx',
+            objects: './FrontEnd/Objects/index.tsx',
+            parts: './FrontEnd/Parts/index.tsx',
+
     libs: [
         'bootstrap', 
         'bootstrap/dist/css/bootstrap.css', 

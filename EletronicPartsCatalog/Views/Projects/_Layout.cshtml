@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - E-Catalog</title>
+    <title>@ViewData["Title"] - SCC</title>
 
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,900" rel="stylesheet">
     <link href="~/dist/styles/libs.css" rel="stylesheet" />
@@ -24,12 +24,22 @@
                 </button>
                 <a asp-controller="@(SignInManager.IsSignedIn(User) ? "Projects" : "Home")"
                    asp-action="Index"
-                   class="navbar-brand">E-Catalog</a>
+                   class="navbar-brand">SCC</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+                    <li><a asp-controller="Search" asp-action="Index">Buscar</a></li>
                     @if (SignInManager.IsSignedIn(User)) {
-                        <li><a asp-controller="Projects" asp-action="Index">Projetos</a></li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                Minhas Contribuições
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a asp-controller="Projects" asp-action="Index">Projetos</a></li>
+                                <li><a asp-controller="Objects" asp-action="Index">E-Waste</a></li>
+                                <li><a asp-controller="Parts" asp-action="Index">Componentes</a></li>
+                            </ul>
+                        </li>
                     }
                 </ul>
                 @await Html.PartialAsync("_LoginPartial")

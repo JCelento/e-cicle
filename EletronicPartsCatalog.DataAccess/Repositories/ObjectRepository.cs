@@ -26,7 +26,7 @@ namespace EletronicPartsCatalog.DataAccess.Repositories
                     Description = x.Description,
                     IsDeleted = x.IsDeleted,
                     CreationDate = x.CreationDate,
-                    CreatedBy = x.CreatedBy.UserName
+                    CreatedBy = x.CreatedBy
                 })
                 .ToList();
         }
@@ -41,7 +41,7 @@ namespace EletronicPartsCatalog.DataAccess.Repositories
                 Description = obj.Description,
                 CreationDate = obj.CreationDate,
                 IsDeleted = obj.IsDeleted,
-                CreatedBy = obj.CreatedBy.UserName
+                CreatedBy = obj.CreatedBy
             };
         }
 
@@ -51,6 +51,7 @@ namespace EletronicPartsCatalog.DataAccess.Repositories
                 Description = obj.Description,
                 IsDeleted = false,
                 CreationDate = DateTime.Now,
+                CreatedBy = obj.CreatedBy,
                 ObjectParts = obj.ObjectParts
             });
 
@@ -68,7 +69,7 @@ namespace EletronicPartsCatalog.DataAccess.Repositories
                     Description = existingObject.Description,
                     CreationDate = existingObject.CreationDate,
                     IsDeleted = existingObject.IsDeleted,
-                    CreatedBy = existingObject.CreatedBy.UserName
+                    CreatedBy = existingObject.CreatedBy
                 };
             }
 
