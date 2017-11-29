@@ -8,6 +8,6 @@ namespace EletronicPartsCatalog.Contracts.DataContracts
         public string Name { get; set; }
         public string Description { get; set; }
         public string CreatedBy { get; set; }
-        public List<PartDto> Parts { get; set; }
+        public List<ObjectPartDto> ObjectParts { get; set; }
     }
 }

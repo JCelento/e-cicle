@@ -11,9 +11,10 @@ using System;
 namespace EletronicPartsCatalog.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171129110952_AddingJoinEntity")]
+    partial class AddingJoinEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -185,7 +186,7 @@ namespace EletronicPartsCatalog.DataAccess.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("CreatedBy");
+                    b.Property<string>("CreatedById");
 
                     b.Property<DateTime>("CreationDate");
 
@@ -197,6 +198,8 @@ namespace EletronicPartsCatalog.DataAccess.Migrations
                         .IsRequired();
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CreatedById");
 
                     b.ToTable("Projects");
                 });
@@ -345,6 +348,13 @@ namespace EletronicPartsCatalog.DataAccess.Migrations
                 });
 
             modelBuilder.Entity("EletronicPartsCatalog.DataAccess.Models.Part", b =>
+                {
+                    b.HasOne("EletronicPartsCatalog.DataAccess.Models.ApplicationUser", "CreatedBy")
+                        .WithMany()
+                        .HasForeignKey("CreatedById");
+                });
+
+            modelBuilder.Entity("EletronicPartsCatalog.DataAccess.Models.Project", b =>
                 {
                     b.HasOne("EletronicPartsCatalog.DataAccess.Models.ApplicationUser", "CreatedBy")
                         .WithMany()
