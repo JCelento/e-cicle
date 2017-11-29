@@ -14,7 +14,7 @@ namespace EletronicPartsCatalog.DataAccess.Models
         public List<PartDto> Parts { get; set; }
         public bool IsDeleted { get; set; }
         public DateTime CreationDate { get; set; }
-        public ApplicationUser CreatedBy { get; set; }
+        public string CreatedBy { get; set; }
 
     }
 }

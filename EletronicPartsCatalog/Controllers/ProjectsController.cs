@@ -31,7 +31,8 @@ namespace EletronicPartsCatalog.Web.Controllers
         public IActionResult Add(ProjectCreateViewModel viewModel) {
             var result = _projectsService.Add(new AddProjectDto {
                 Name = viewModel.Name,
-                Description = viewModel.Description
+                Description = viewModel.Description,
+                CreatedBy = User.Identity.Name
             });
 
             if (result.IsSuccess) {

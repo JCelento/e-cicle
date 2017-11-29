@@ -36,6 +36,7 @@ namespace EletronicPartsCatalog.DataAccess.Repositories
                 Name = project.Name,
                 Description = project.Description,
                 CreationDate = project.CreationDate,
+                CreatedBy = project.CreatedBy,
                 IsDeleted = project.IsDeleted
             };
         }
@@ -46,6 +47,7 @@ namespace EletronicPartsCatalog.DataAccess.Repositories
                 Description = project.Description,
                 IsDeleted = false,
                 CreationDate = DateTime.Now,
+                CreatedBy = project.CreatedBy,
                 Parts = project.Parts
             });
 

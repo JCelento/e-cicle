@@ -10,7 +10,7 @@ namespace EletronicPartsCatalog.DataAccess.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public List<ObjectDto> Objects { get; set; }
+        public List<ObjectPartDto> PartObjects { get; set; }
         public bool IsDeleted { get; set; }
         public DateTime CreationDate { get; set; }
         public ApplicationUser CreatedBy { get; set; }

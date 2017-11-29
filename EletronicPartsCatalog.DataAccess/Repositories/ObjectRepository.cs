@@ -22,7 +22,7 @@ namespace EletronicPartsCatalog.DataAccess.Repositories
                 .Select(x => new ObjectDto() {
                     Id = x.Id,
                     Name = x.Name,
-                    Parts = x.Parts,
+                    ObjectParts = x.ObjectParts,
                     Description = x.Description,
                     IsDeleted = x.IsDeleted,
                     CreationDate = x.CreationDate,
@@ -37,7 +37,7 @@ namespace EletronicPartsCatalog.DataAccess.Repositories
             return new ObjectDto {
                 Id = obj.Id,
                 Name = obj.Name,
-                Parts = obj.Parts,
+                ObjectParts = obj.ObjectParts,
                 Description = obj.Description,
                 CreationDate = obj.CreationDate,
                 IsDeleted = obj.IsDeleted,
@@ -51,7 +51,7 @@ namespace EletronicPartsCatalog.DataAccess.Repositories
                 Description = obj.Description,
                 IsDeleted = false,
                 CreationDate = DateTime.Now,
-                Parts = obj.Parts
+                ObjectParts = obj.ObjectParts
             });
 
             _dbContext.SaveChanges();
@@ -64,7 +64,7 @@ namespace EletronicPartsCatalog.DataAccess.Repositories
                 return new ObjectDto {
                     Id = existingObject.Id,
                     Name = existingObject.Name,
-                    Parts = existingObject.Parts,
+                    ObjectParts = existingObject.ObjectParts,
                     Description = existingObject.Description,
                     CreationDate = existingObject.CreationDate,
                     IsDeleted = existingObject.IsDeleted,
