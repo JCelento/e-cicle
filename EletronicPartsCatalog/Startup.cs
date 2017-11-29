@@ -53,6 +53,9 @@ namespace EletronicPartsCatalog
             services.AddScoped<IObjectsRepository, ObjectsRepository>();
             services.AddScoped<IPartsRepository, PartsRepository>();
             services.AddScoped<IProjectsService, ProjectsService>();
+            services.AddScoped<IObjectsService, ObjectsService>();
+            services.AddScoped<IPartsService, PartsService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
