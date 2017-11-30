@@ -29,6 +29,22 @@
                             <span class="ObjectsListItem-description">@Model.Description</span>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-12 padding-none">
+                            <span class="ObjectsListItem-createdby">@Model.CreatedBy</span>
+                        </div>
+                    </div>
+                        <div class="row">
+                            <div class="col-md-12 padding-none">
+                                <h5>Componentes desse objeto:</h5>
+                                <ul>
+                                    @for (var i = 0; i < Model.Parts.Count; i++) {
+
+                                        <li><a href="@Url.Action("DetailsPart", "Parts", @Model.Parts[i].Id)">@Model.Parts[i].Name</a></li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
                 </div>
             </div>
             <form action="/Objects/Delete/@Model.Id" method="post">

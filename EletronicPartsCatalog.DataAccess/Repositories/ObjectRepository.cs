@@ -33,15 +33,21 @@ namespace EletronicPartsCatalog.DataAccess.Repositories
 
         public ObjectDto GetById(int id) {
             var obj = _dbContext.Objects.First(x => x.Id == id);
+            var objparts = new List<ObjectPartDto>();
 
+            foreach (var o in _dbContext.ObjectParts)
+            {
+                if(o.ObjectId == obj.Id)
+                    objparts.Add(o);
+            }
             return new ObjectDto {
                 Id = obj.Id,
                 Name = obj.Name,
-                ObjectParts = obj.ObjectParts,
+                ObjectParts = objparts,
                 Description = obj.Description,
                 CreationDate = obj.CreationDate,
                 IsDeleted = obj.IsDeleted,
-                CreatedBy = obj.CreatedBy
+                CreatedBy = obj.CreatedBy,
             };
         }
 

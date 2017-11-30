@@ -8,12 +8,12 @@ using Microsoft.AspNetCore.Mvc;
 namespace EletronicPartsCatalog.Web.Controllers
 {
     [Authorize]
-    public class ObjectsController : Controller
+    public class PartsController : Controller
     {
-        private IObjectsService _objectsService;
+        private IPartsService _partsService;
 
-        public ObjectsController(IObjectsService objectsService) {
-            _objectsService = objectsService;
+        public PartsController(IPartsService partsService) {
+            _partsService = partsService;
         }
         [HttpGet]
         public IActionResult Index() {
@@ -22,21 +22,21 @@ namespace EletronicPartsCatalog.Web.Controllers
 
         [HttpGet]
         public IActionResult Add() {
-            return View(new ObjectCreateViewModel());
+            return View(new PartCreateViewModel());
         }
 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Add(ObjectCreateViewModel viewModel) {
-            var result = _objectsService.Add(new AddObjectDto {
+        public IActionResult Add(PartCreateViewModel viewModel) {
+            var result = _partsService.Add(new AddPartDto {
                 Name = viewModel.Name,
                 Description = viewModel.Description,
                 CreatedBy = User.Identity.Name
             });
 
             if (result.IsSuccess) {
-                return RedirectToAction(nameof(ObjectsController.Index), "Objects");
+                return RedirectToAction(nameof(PartsController.Index), "Parts");
             } else {
                 viewModel.ErrorMessage = result.ErrorMessage;
                 return View(viewModel);
@@ -46,16 +46,16 @@ namespace EletronicPartsCatalog.Web.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Delete(int id) {
-            _objectsService.Delete(id);
+            _partsService.Delete(id);
 
-            return RedirectToAction(nameof(ObjectsController.Index), "Objects");
+            return RedirectToAction(nameof(PartsController.Index), "Parts");
         }
 
         [HttpGet]
-        public IActionResult DetailsObj(int id) {
-            var result = _objectsService.GetById(id);
+        public IActionResult DetailsPart(int id) {
+            var result = _partsService.GetById(id);
 
-            return View(new ObjectViewModel() {
+            return View(new PartViewModel() {
                 Id = result.Item.Id,
                 Name = result.Item.Name,
                 Description = result.Item.Description,
