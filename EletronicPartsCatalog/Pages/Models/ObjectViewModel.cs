@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EletronicPartsCatalog.Contracts.DataContracts;
+using EletronicPartsCatalog.DataAccess.Models;
 
 namespace EletronicPartsCatalog.Web.Pages.Models
 {
@@ -12,6 +14,7 @@ namespace EletronicPartsCatalog.Web.Pages.Models
         public string Description { get; set; }
         public string CreationDate { get; set; }
         public string CreatedBy { get; set; }
+        public List<PartDto> Parts { get; set; }
 
     }
 }

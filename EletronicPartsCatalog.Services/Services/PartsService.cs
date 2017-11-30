@@ -28,6 +28,18 @@ namespace EletronicPartsCatalog.Services.Services
             }
         }
 
+
+        public CommonResult<PartDto> GetByName(string name)
+        {
+            var part =_partsRepository.GetByName(name);
+
+            if (part == null || part.IsDeleted) {
+                return CommonResult<PartDto>.Failure<PartDto>("Problem occured during fetching part with given name.");
+            } else {
+                return CommonResult<PartDto>.Success<PartDto>(part);
+            }
+        }
+
         public CommonResult Add(AddPartDto part) {
             if (string.IsNullOrEmpty(part.Name)) {
                 return CommonResult.Failure("Cannot create part without name provided.");

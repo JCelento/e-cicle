@@ -13,7 +13,7 @@ class PartsListItem extends React.Component<PartListItemProps, any> {
 
     render() {
         return (
-            <a href={`/Parts/DetailsObj/${this.props.part.Id}`}>
+            <a href={`/Parts/DetailsPart/${this.props.part.Id}`}>
                 <div className='PartsListItem row'>
                     <div className='col-md-12'>
                         <div className='PartsListItem-summary row'>

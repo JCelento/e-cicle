@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using EletronicPartsCatalog.Contracts.DataContracts;
 
 namespace EletronicPartsCatalog.Web.Pages.Models
 {
@@ -13,5 +15,7 @@ namespace EletronicPartsCatalog.Web.Pages.Models
         public string CreatedBy { get; set; }
 
         public string ErrorMessage { get; set; }
+
+        public List<PartDto> Parts { get; set; }
     }
 }
