@@ -2,7 +2,7 @@
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
-using EletronicPartsCatalog.Domain;
+using EletronicPartsCatalog.Api.Domain;
 using EletronicPartsCatalog.Infrastructure;
 using EletronicPartsCatalog.Infrastructure.Errors;
 using FluentValidation;

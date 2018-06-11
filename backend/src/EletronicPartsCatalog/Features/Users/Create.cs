@@ -4,7 +4,7 @@ using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using EletronicPartsCatalog.Domain;
+using EletronicPartsCatalog.Api.Domain;
 using EletronicPartsCatalog.Infrastructure;
 using EletronicPartsCatalog.Infrastructure.Errors;
 using EletronicPartsCatalog.Infrastructure.Security;
@@ -86,7 +86,7 @@ namespace EletronicPartsCatalog.Features.Users
 
                 _context.Persons.Add(person);
                 await _context.SaveChangesAsync(cancellationToken);
-                var user = _mapper.Map<Domain.Person, User>(person);
+                var user = _mapper.Map<Person, User>(person);
                 user.Token = await _jwtTokenGenerator.CreateToken(person.Username);
                 return new UserEnvelope(user);
             }

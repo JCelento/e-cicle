@@ -1,7 +1,7 @@
 using System;
 using Newtonsoft.Json;
 
-namespace EletronicPartsCatalog.Domain
+namespace EletronicPartsCatalog.Api.Domain
 {
    public class Comment
     {

@@ -1,19 +1,35 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 using System.Collections.Generic;
 
 namespace EletronicPartsCatalog.Api.Migrations
 {
-    public partial class IncludesProjects : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Components",
+                columns: table => new
+                {
+                    ComponentId = table.Column<string>(nullable: false),
+                    ComponentImage = table.Column<string>(nullable: true),
+                    CreatedAt = table.Column<DateTime>(nullable: false),
+                    Slug = table.Column<string>(nullable: true),
+                    UpdatedAt = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Components", x => x.ComponentId);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Persons",
                 columns: table => new
                 {
                     PersonId = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Bio = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true),
                     Hash = table.Column<byte[]>(nullable: true),
@@ -38,6 +54,17 @@ namespace EletronicPartsCatalog.Api.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "WhereToFind",
+                columns: table => new
+                {
+                    WhereToFindItId = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_WhereToFind", x => x.WhereToFindItId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "FollowedPeople",
                 columns: table => new
                 {
@@ -52,13 +79,13 @@ namespace EletronicPartsCatalog.Api.Migrations
                         column: x => x.ObserverId,
                         principalTable: "Persons",
                         principalColumn: "PersonId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_FollowedPeople_Persons_TargetId",
                         column: x => x.TargetId,
                         principalTable: "Persons",
                         principalColumn: "PersonId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -66,11 +93,12 @@ namespace EletronicPartsCatalog.Api.Migrations
                 columns: table => new
                 {
                     ProjectId = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     AuthorPersonId = table.Column<int>(nullable: true),
                     Body = table.Column<string>(nullable: true),
                     CreatedAt = table.Column<DateTime>(nullable: false),
                     Description = table.Column<string>(nullable: true),
+                    ProjectImage = table.Column<string>(nullable: true),
                     Slug = table.Column<string>(nullable: true),
                     Title = table.Column<string>(nullable: true),
                     UpdatedAt = table.Column<DateTime>(nullable: false)
@@ -87,13 +115,38 @@ namespace EletronicPartsCatalog.Api.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ComponentWhereToFindIt",
+                columns: table => new
+                {
+                    ComponentId = table.Column<string>(nullable: false),
+                    WhereToFindItId = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ComponentWhereToFindIt", x => new { x.ComponentId, x.WhereToFindItId });
+                    table.ForeignKey(
+                        name: "FK_ComponentWhereToFindIt_Components_ComponentId",
+                        column: x => x.ComponentId,
+                        principalTable: "Components",
+                        principalColumn: "ComponentId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ComponentWhereToFindIt_WhereToFind_WhereToFindItId",
+                        column: x => x.WhereToFindItId,
+                        principalTable: "WhereToFind",
+                        principalColumn: "WhereToFindItId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Comments",
                 columns: table => new
                 {
                     CommentId = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     AuthorPersonId = table.Column<int>(nullable: true),
                     Body = table.Column<string>(nullable: true),
+                    ComponentId = table.Column<string>(nullable: true),
                     CreatedAt = table.Column<DateTime>(nullable: false),
                     ProjectId = table.Column<int>(nullable: true),
                     UpdatedAt = table.Column<DateTime>(nullable: false)
@@ -108,11 +161,41 @@ namespace EletronicPartsCatalog.Api.Migrations
                         principalColumn: "PersonId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
+                        name: "FK_Comments_Components_ComponentId",
+                        column: x => x.ComponentId,
+                        principalTable: "Components",
+                        principalColumn: "ComponentId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
                         name: "FK_Comments_Projects_ProjectId",
                         column: x => x.ProjectId,
                         principalTable: "Projects",
                         principalColumn: "ProjectId",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProjectComponents",
+                columns: table => new
+                {
+                    ProjectId = table.Column<int>(nullable: false),
+                    ComponentId = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProjectComponents", x => new { x.ProjectId, x.ComponentId });
+                    table.ForeignKey(
+                        name: "FK_ProjectComponents_Components_ComponentId",
+                        column: x => x.ComponentId,
+                        principalTable: "Components",
+                        principalColumn: "ComponentId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ProjectComponents_Projects_ProjectId",
+                        column: x => x.ProjectId,
+                        principalTable: "Projects",
+                        principalColumn: "ProjectId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -169,14 +252,29 @@ namespace EletronicPartsCatalog.Api.Migrations
                 column: "AuthorPersonId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Comments_ComponentId",
+                table: "Comments",
+                column: "ComponentId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Comments_ProjectId",
                 table: "Comments",
                 column: "ProjectId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ComponentWhereToFindIt_WhereToFindItId",
+                table: "ComponentWhereToFindIt",
+                column: "WhereToFindItId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_FollowedPeople_TargetId",
                 table: "FollowedPeople",
                 column: "TargetId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProjectComponents_ComponentId",
+                table: "ProjectComponents",
+                column: "ComponentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProjectFavorites_PersonId",
@@ -200,13 +298,25 @@ namespace EletronicPartsCatalog.Api.Migrations
                 name: "Comments");
 
             migrationBuilder.DropTable(
+                name: "ComponentWhereToFindIt");
+
+            migrationBuilder.DropTable(
                 name: "FollowedPeople");
+
+            migrationBuilder.DropTable(
+                name: "ProjectComponents");
 
             migrationBuilder.DropTable(
                 name: "ProjectFavorites");
 
             migrationBuilder.DropTable(
                 name: "ProjectTags");
+
+            migrationBuilder.DropTable(
+                name: "WhereToFind");
+
+            migrationBuilder.DropTable(
+                name: "Components");
 
             migrationBuilder.DropTable(
                 name: "Projects");

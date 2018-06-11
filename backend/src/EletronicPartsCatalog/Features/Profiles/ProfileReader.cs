@@ -2,6 +2,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using AutoMapper;
+using EletronicPartsCatalog.Api.Domain;
 using EletronicPartsCatalog.Infrastructure;
 using EletronicPartsCatalog.Infrastructure.Errors;
 using Microsoft.EntityFrameworkCore;
@@ -32,7 +33,7 @@ namespace EletronicPartsCatalog.Features.Profiles
             {
                 throw new RestException(HttpStatusCode.NotFound);
             }
-            var profile = _mapper.Map<Domain.Person, Profile>(person);
+            var profile = _mapper.Map<Person, Profile>(person);
 
             if (currentUserName != null)
             {

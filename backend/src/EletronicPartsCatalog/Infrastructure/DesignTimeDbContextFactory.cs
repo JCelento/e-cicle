@@ -19,8 +19,8 @@ namespace EletronicPartsCatalog.Api.Infrastructure
                 .AddJsonFile("appsettings.json")
                 .Build();
             var builder = new DbContextOptionsBuilder<EletronicPartsCatalogContext>();
-            var connectionString = configuration.GetConnectionString("SqLite");
-            builder.UseSqlite($"Filename={connectionString}");
+            var connectionString = configuration.GetConnectionString("Sql");
+            builder.UseSqlServer(connectionString);
 
             return new EletronicPartsCatalogContext(builder.Options);
         }

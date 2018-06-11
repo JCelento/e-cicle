@@ -42,10 +42,14 @@ const Tags = {
 };
 
 const limit = (count, p) => `limit=${count}&offset=${p ? p * count : 0}`;
-const omitSlug = project => Object.assign({}, project, { slug: undefined })
+const omitProjectSlug = project => Object.assign({}, project, { slug: undefined })
+const omitComponentSlug = component => Object.assign({}, component, { slug: undefined })
+
 const Projects = {
   all: page =>
     requests.get(`/projects?${limit(10, page)}`),
+  bySearch: (search, page) => 
+    requests.get(`/projects?search=${encode(search)}&${limit(10, page)}`),  
   byAuthor: (author, page) =>
     requests.get(`/projects?author=${encode(author)}&${limit(5, page)}`),
   byTag: (tag, page) =>
@@ -63,9 +67,18 @@ const Projects = {
   unfavorite: slug =>
     requests.del(`/projects/${slug}/favorite`),
   update: project =>
-    requests.put(`/projects/${project.slug}`, { project: omitSlug(project) }),
+    requests.put(`/projects/${project.slug}`, { project: omitProjectSlug(project) }),
   create: project =>
     requests.post('/projects', { project })
+};
+
+const Components = {
+get: slug =>
+  requests.get(`/components/${slug}`),
+update: component =>
+  requests.put(`/components/${component.slug}`, { component: omitComponentSlug(component) }),
+create: component =>
+  requests.post('/components', { component })
 };
 
 const Comments = {
@@ -92,5 +105,6 @@ export default {
   Comments,
   Profile,
   Tags,
+  Components,
   setToken: _token => { token = _token; }
 };

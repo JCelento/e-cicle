@@ -147,7 +147,7 @@ class Profile extends React.Component {
 
             <div className="col-xs-12 col-md-10 offset-md-1">
 
-              <div className="projects-toggle">
+              <div className="articles-toggle">
                 {this.renderTabs()}
               </div>
 

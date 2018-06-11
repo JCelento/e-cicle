@@ -8,7 +8,9 @@ import {
   REMOVE_TAG,
   PROJECT_SUBMITTED,
   EDITOR_PAGE_UNLOADED,
-  UPDATE_FIELD_EDITOR
+  UPDATE_FIELD_EDITOR,
+  ADD_COMPONENT,
+  REMOVE_COMPONENT
 } from '../constants/actionTypes';
 
 const mapStateToProps = state => ({
@@ -22,6 +24,10 @@ const mapDispatchToProps = dispatch => ({
     dispatch({ type: EDITOR_PAGE_LOADED, payload }),
   onRemoveTag: tag =>
     dispatch({ type: REMOVE_TAG, tag }),
+  onAddComponent: () =>
+    dispatch({ type: ADD_COMPONENT }),
+  onRemoveComponent: component =>
+    dispatch({ type: REMOVE_COMPONENT, component }),
   onSubmit: payload =>
     dispatch({ type: PROJECT_SUBMITTED, payload }),
   onUnload: payload =>
@@ -31,6 +37,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 class Editor extends React.Component {
+
   constructor() {
     super();
 
@@ -40,8 +47,10 @@ class Editor extends React.Component {
     this.changeDescription = updateFieldEvent('description');
     this.changeBody = updateFieldEvent('body');
     this.changeTagInput = updateFieldEvent('tagInput');
+    this.changeComponentInput = updateFieldEvent('componentInput');
+    this.changeProjectImage = updateFieldEvent('projectImage');
 
-    this.watchForEnter = ev => {
+    this.watchForEnterTag = ev => {
       if (ev.keyCode === 13) {
         ev.preventDefault();
         this.props.onAddTag();
@@ -52,13 +61,26 @@ class Editor extends React.Component {
       this.props.onRemoveTag(tag);
     };
 
+    this.watchForEnterComponent = ev => {
+      if (ev.keyCode === 13) {
+        ev.preventDefault();
+        this.props.onAddComponent();
+      }
+    };
+
+    this.removeComponentHandler = component => () => {
+      this.props.onRemoveComponent(component);
+    };
+
     this.submitForm = ev => {
       ev.preventDefault();
       const project = {
         title: this.props.title,
+        projectImage: this.props.projectImage,
         description: this.props.description,
         body: this.props.body,
-        tagList: this.props.tagList
+        tagList: this.props.tagList,
+        componentList: this.props.componentList
       };
 
       const slug = { slug: this.props.projectSlug };
@@ -92,6 +114,7 @@ class Editor extends React.Component {
   }
 
   render() {
+
     return (
       <div className="editor-page">
         <div className="container page">
@@ -116,7 +139,16 @@ class Editor extends React.Component {
                     <input
                       className="form-control"
                       type="text"
-                      placeholder="O que seu projeto faz?"
+                      placeholder="Endereço para a imagem do seu projeto"
+                      value={this.props.projectImage}
+                      onChange={this.changeProjectImage} />
+                  </fieldset>
+
+                  <fieldset className="form-group">
+                    <input
+                      className="form-control"
+                      type="text"
+                      placeholder="Breve descrição do seu projeto"
                       value={this.props.description}
                       onChange={this.changeDescription} />
                   </fieldset>
@@ -138,7 +170,7 @@ class Editor extends React.Component {
                       placeholder="Atribua tags"
                       value={this.props.tagInput}
                       onChange={this.changeTagInput}
-                      onKeyUp={this.watchForEnter} />
+                      onKeyUp={this.watchForEnterTag} />
 
                     <div className="tag-list">
                       {
@@ -149,6 +181,31 @@ class Editor extends React.Component {
                                   onClick={this.removeTagHandler(tag)}>
                               </i>
                               {tag}
+                            </span>
+                          );
+                        })
+                      }
+                    </div>
+                  </fieldset>
+
+                  <fieldset className="form-group">
+                    <input
+                      className="form-control"
+                      type="text"
+                      placeholder="Quais componentes eletronicos utilizou?"
+                      value={this.props.componentInput}
+                      onChange={this.changeComponentInput}
+                      onKeyUp={this.watchForEnterComponent} />
+
+                    <div className="tag-list">
+                      {
+                        (this.props.componentList || []).map(component => {
+                          return (
+                            <span className="tag-default tag-pill" key={component}>
+                              <i  className="ion-close-round"
+                                  onClick={this.removeComponentHandler(component)}>
+                              </i>
+                              {component}
                             </span>
                           );
                         })

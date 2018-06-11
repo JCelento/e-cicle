@@ -18,7 +18,7 @@ import {
 } from '../constants/actionTypes';
 
 const defaultState = {
-  appName: 'SCC',
+  appName: 'e-Cicle',
   token: null,
   viewChangeCounter: 0
 };

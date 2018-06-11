@@ -20,10 +20,6 @@ namespace EletronicPartsCatalog
 {
     public class Startup
     {
-        public const string DATABASE_FILE = "realworld.db";
-
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAuthorization(options =>
@@ -46,7 +42,7 @@ namespace EletronicPartsCatalog
                 x.AddSecurityDefinition("Bearer", new ApiKeyScheme
                 {
                     In = "header",
-                    Description = "Please insert JWT with Bearer into field",
+                    Description = "Por favor inclua o JWT com Bearer no campo abaixo",
                     Name = "Authorization",
                     Type = "apiKey"
                 });
@@ -55,7 +51,11 @@ namespace EletronicPartsCatalog
                 {
                     { "Bearer", new string[] { } }
                 });
-                x.SwaggerDoc("v1", new Info { Title = "RealWorld API", Version = "v1" });
+                x.SwaggerDoc("v1", new Info
+                {
+                    Title = "e-Cicle API",
+                    Version = "v1"
+                });
                 x.CustomSchemaIds(y => y.FullName);
                 x.DocInclusionPredicate((version, apiDescription) => true);
                 x.TagActionsBy(y => y.GroupName);
@@ -84,7 +84,6 @@ namespace EletronicPartsCatalog
             services.AddJwt();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             app.UseAuthentication();
@@ -101,7 +100,6 @@ namespace EletronicPartsCatalog
 
             app.UseMvc();
 
-            // Enable middleware to serve generated Swagger as a JSON endpoint
             app.UseSwagger(c =>
             {
                 c.RouteTemplate = "swagger/{documentName}/swagger.json";
@@ -110,7 +108,7 @@ namespace EletronicPartsCatalog
             // Enable middleware to serve swagger-ui assets(HTML, JS, CSS etc.)
             app.UseSwaggerUI(x =>
             {
-                x.SwaggerEndpoint("/swagger/v1/swagger.json", "RealWorld API V1");
+                x.SwaggerEndpoint("/swagger/v1/swagger.json", "eCicle API V1");
             });
             
             app.ApplicationServices.GetRequiredService<EletronicPartsCatalogContext>().Database.EnsureCreated();

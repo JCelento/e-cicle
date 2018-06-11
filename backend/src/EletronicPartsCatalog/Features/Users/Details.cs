@@ -45,7 +45,7 @@ namespace EletronicPartsCatalog.Features.Users
                 {
                     throw new RestException(HttpStatusCode.NotFound);
                 }
-                return new UserEnvelope(_mapper.Map<Domain.Person, User>(person));
+                return new UserEnvelope(_mapper.Map<Api.Domain.Person, User>(person));
             }
         }
     }

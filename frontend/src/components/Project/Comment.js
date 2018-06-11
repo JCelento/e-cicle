@@ -1,6 +1,7 @@
 import DeleteButton from './DeleteButton';
 import { Link } from 'react-router-dom';
 import React from 'react';
+import { formatDate } from '../../util.js';
 
 const Comment = props => {
   const comment = props.comment;
@@ -24,7 +25,7 @@ const Comment = props => {
           {comment.author.username}
         </Link>
         <span className="date-posted">
-          {new Date(comment.createdAt).toDateString()}
+          {formatDate(new Date(comment.createdAt))}
         </span>
         <DeleteButton show={show} slug={props.slug} commentId={comment.id} />
       </div>

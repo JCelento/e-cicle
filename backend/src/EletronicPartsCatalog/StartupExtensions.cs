@@ -17,7 +17,7 @@ namespace EletronicPartsCatalog
         {
             services.AddOptions();
 
-            var signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("somethinglongerforthisdumbalgorithmisrequired"));
+            var signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("9B58CDEFEFC68E0025748A676897F166A2E101A5936EB71C8786735865632D3B"));
             var signingCredentials = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256);
             var issuer = "issuer";
             var audience = "audience";

@@ -6,7 +6,7 @@ namespace EletronicPartsCatalog.Features.Users
     {
         public MappingProfile()
         {
-            CreateMap<Domain.Person, User>(MemberList.None);
+            CreateMap<Api.Domain.Person, User>(MemberList.None);
         }
     }
 }

@@ -5,6 +5,8 @@ import {
   ASYNC_START,
   ADD_TAG,
   REMOVE_TAG,
+  ADD_COMPONENT,
+  REMOVE_COMPONENT,
   UPDATE_FIELD_EDITOR
 } from '../constants/actionTypes';
 
@@ -17,8 +19,11 @@ export default (state = {}, action) => {
         title: action.payload ? action.payload.project.title : '',
         description: action.payload ? action.payload.project.description : '',
         body: action.payload ? action.payload.project.body : '',
+        projectImage: action.payload ? action.payload.project.projectImage : '',
         tagInput: '',
-        tagList: action.payload ? action.payload.project.tagList : []
+        tagList: action.payload ? action.payload.project.tagList : [],
+        componentInput: '',
+        componentList: action.payload ? action.payload.project.componentList : []
       };
     case EDITOR_PAGE_UNLOADED:
       return {};
@@ -43,6 +48,18 @@ export default (state = {}, action) => {
       return {
         ...state,
         tagList: state.tagList.filter(tag => tag !== action.tag)
+      };
+
+      case ADD_COMPONENT:
+      return {
+        ...state,
+        componentList: state.componentList.concat([state.componentInput]),
+        componentInput: ''
+      };
+    case REMOVE_COMPONENT:
+      return {
+        ...state,
+        componentList: state.componentList.filter(component => component !== action.component)
       };
     case UPDATE_FIELD_EDITOR:
       return { ...state, [action.key]: action.value };

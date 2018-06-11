@@ -119,5 +119,6 @@
   </resheader>
   <data name="InternalServerError" xml:space="preserve">
     <value>An internal error has occurred.</value>
+    <comment>Mensagem em caso de erro não esperado</comment>
   </data>
 </root>

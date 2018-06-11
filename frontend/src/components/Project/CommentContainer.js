@@ -20,7 +20,7 @@ const CommentContainer = props => {
     );
   } else {
     return (
-      <div className="col-xs-12 col-md-8 offset-md-2">
+      <div className="col-xs-12 offset-md-5">
         <p>
           <Link to="/login">Faça Login</Link>
           &nbsp;ou&nbsp;

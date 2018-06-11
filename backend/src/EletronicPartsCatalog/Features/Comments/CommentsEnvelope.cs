@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using EletronicPartsCatalog.Domain;
+using EletronicPartsCatalog.Api.Domain;
 
 namespace EletronicPartsCatalog.Features.Comments
 {

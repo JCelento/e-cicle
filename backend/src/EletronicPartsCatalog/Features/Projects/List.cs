@@ -1,7 +1,8 @@
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using EletronicPartsCatalog.Domain;
+using EletronicPartsCatalog.Api.Domain;
 using EletronicPartsCatalog.Infrastructure;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -12,13 +13,14 @@ namespace EletronicPartsCatalog.Features.Projects
     {
         public class Query : IRequest<ProjectsEnvelope>
         {
-            public Query(string tag, string author, string favorited, int? limit, int? offset)
+            public Query(string tag, string author, string favorited, string search, int? limit, int? offset)
             {
                 Tag = tag;
                 Author = author;
                 FavoritedUsername = favorited;
                 Limit = limit;
                 Offset = offset;
+                Search = search;
             }
 
             public string Tag { get; }
@@ -27,6 +29,8 @@ namespace EletronicPartsCatalog.Features.Projects
             public int? Limit { get; }
             public int? Offset { get; }
             public bool IsFeed { get; set; }
+            public string Search { get; set; }
+
         }
 
         public class QueryHandler : IRequestHandler<Query, ProjectsEnvelope>
@@ -87,6 +91,10 @@ namespace EletronicPartsCatalog.Features.Projects
                     }
                 }
 
+                if (!string.IsNullOrEmpty(message.Search)){
+                    queryable = GetProjectsLikeSearched(message.Search, queryable);
+                }
+
                 var Projects = await queryable
                     .OrderByDescending(x => x.CreatedAt)
                     .Skip(message.Offset ?? 0)
@@ -100,6 +108,18 @@ namespace EletronicPartsCatalog.Features.Projects
                     ProjectsCount = queryable.Count()
                 };
             }
+
+
+            public IQueryable<Project> GetProjectsLikeSearched(string q, IQueryable<Project> queryable)
+            {
+                    return queryable.
+                    Where((c) => c.Title.ToLower().Contains(q.ToLower()) 
+                    || c.Author.Username.ToLower().Contains(q.ToLower())
+                    || c.ProjectTags.Any(x => x.TagId.ToLower().Contains(q.ToLower())))
+                    .OrderBy((o) => o.Title);
+                
+            }
         }
+
     }
 }

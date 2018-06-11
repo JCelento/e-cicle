@@ -17,15 +17,15 @@ namespace EletronicPartsCatalog.Features.Projects
         }
 
         [HttpGet]
-        public async Task<ProjectsEnvelope> Get([FromQuery] string tag, [FromQuery] string author, [FromQuery] string favorited, [FromQuery] int? limit, [FromQuery] int? offset)
+        public async Task<ProjectsEnvelope> Get([FromQuery] string tag, [FromQuery] string author, [FromQuery] string favorited, [FromQuery] string search, [FromQuery] int? limit, [FromQuery] int? offset)
         {
-            return await _mediator.Send(new List.Query(tag, author,favorited,limit, offset));
+            return await _mediator.Send(new List.Query(tag, author,favorited, search, limit, offset));
         }
 
         [HttpGet("feed")]
-        public async Task<ProjectsEnvelope> GetFeed([FromQuery] string tag, [FromQuery] string author, [FromQuery] string favorited, [FromQuery] int? limit, [FromQuery] int? offset)
+        public async Task<ProjectsEnvelope> GetFeed([FromQuery] string tag, [FromQuery] string author, [FromQuery] string favorited, [FromQuery] string search, [FromQuery] int? limit, [FromQuery] int? offset)
         {
-            return await _mediator.Send(new List.Query(tag, author, favorited, limit, offset)
+            return await _mediator.Send(new List.Query(tag, author, favorited, search, limit, offset)
             {
                 IsFeed = true
             });

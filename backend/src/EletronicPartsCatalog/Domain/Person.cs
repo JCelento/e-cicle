@@ -1,10 +1,16 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using EletronicPartsCatalog.Api.Resources.Images;
 
-namespace EletronicPartsCatalog.Domain
+namespace EletronicPartsCatalog.Api.Domain
 {
     public class Person
     {
+
+        public Person()
+        {
+            Image = ImagePath.DefaultUserImage;
+        }
         [JsonIgnore]
         public int PersonId { get; set; }
 

@@ -3,6 +3,8 @@ using System.IO;
 using System.Threading.Tasks;
 using EletronicPartsCatalog.Infrastructure;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace EletronicPartsCatalog.IntegrationTests
@@ -11,15 +13,21 @@ namespace EletronicPartsCatalog.IntegrationTests
     {
         private readonly IServiceScopeFactory _scopeFactory;
 
-        private readonly string DbName = Guid.NewGuid() + ".db";
-
         public SliceFixture()
         {
             AutoMapper.ServiceCollectionExtensions.UseStaticRegistration = false;
             var startup = new Startup();
             var services = new ServiceCollection();
 
-            services.AddSingleton(new EletronicPartsCatalogContext(DbName));
+            IConfigurationRoot configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json")
+                .Build();
+            var builder = new DbContextOptionsBuilder<EletronicPartsCatalogContext>();
+            var connectionString = configuration.GetConnectionString("TestSql");
+            builder.UseSqlServer(connectionString);
+
+            services.AddSingleton(new EletronicPartsCatalogContext(builder.Options));
 
             startup.ConfigureServices(services);
 
@@ -32,7 +40,7 @@ namespace EletronicPartsCatalog.IntegrationTests
 
         public void Dispose()
         {
-            File.Delete(DbName);
+            this.Dispose();
         }
 
         public async Task ExecuteScopeAsync(Func<IServiceProvider, Task> action)

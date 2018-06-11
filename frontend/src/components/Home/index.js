@@ -3,6 +3,7 @@ import MainView from './MainView';
 import React from 'react';
 import Tags from './Tags';
 import agent from '../../agent';
+import marked from 'marked';
 import { connect } from 'react-redux';
 import {
   HOME_PAGE_LOADED,

@@ -21,11 +21,13 @@ const ProjectActions = props => {
         <Link
           to={`/editor/${project.slug}`}
           className="btn btn-outline-secondary btn-sm">
-          <i className="ion-edit"></i> Edit Project
+          <i className="ion-edit"></i> Editar projeto
         </Link>
+        
+        &nbsp; &nbsp;
 
         <button className="btn btn-outline-danger btn-sm" onClick={del}>
-          <i className="ion-trash-a"></i> Delete Project
+          <i className="ion-trash-a"></i> Deletar Projeto
         </button>
 
       </span>

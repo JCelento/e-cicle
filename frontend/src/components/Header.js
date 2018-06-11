@@ -37,13 +37,19 @@ const LoggedInView = props => {
 
         <li className="nav-item">
           <Link to="/" className="nav-link">
-            Home
+          <i className="ion-home"></i>&nbsp;Home
           </Link>
         </li>
 
         <li className="nav-item">
           <Link to="/editor" className="nav-link">
-            <i className="ion-compose"></i>&nbsp;Criar projeto
+            <i className="ion-ios-lightbulb-outline"></i>&nbsp;Publicar projeto
+          </Link>
+        </li>
+
+        <li className="nav-item">
+          <Link to="/editor-component" className="nav-link">
+            <i className="ion-compose"></i>&nbsp;Cadastrar componente
           </Link>
         </li>
 

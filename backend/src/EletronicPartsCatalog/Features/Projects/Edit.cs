@@ -20,6 +20,8 @@ namespace EletronicPartsCatalog.Features.Projects
             public string Description { get; set; }
 
             public string Body { get; set; }
+
+            public string ProjectImage { get; set; }
         }
 
         public class Command : IRequest<ProjectEnvelope>
@@ -60,6 +62,7 @@ namespace EletronicPartsCatalog.Features.Projects
                 Project.Description = message.Project.Description ?? Project.Description;
                 Project.Body = message.Project.Body ?? Project.Body;
                 Project.Title = message.Project.Title ?? Project.Title;
+                Project.ProjectImage = message.Project.ProjectImage ?? Project.ProjectImage;
                 Project.Slug = Project.Title.GenerateSlug();
 
                 if (_context.ChangeTracker.Entries().First(x => x.Entity == Project).State == EntityState.Modified)

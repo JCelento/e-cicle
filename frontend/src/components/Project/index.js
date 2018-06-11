@@ -39,7 +39,8 @@ class Project extends React.Component {
     const canModify = this.props.currentUser &&
       this.props.currentUser.username === this.props.project.author.username;
     return (
-      <div className="project-page">
+      
+      <div className="article-page">
 
         <div className="banner">
           <div className="container">
@@ -48,19 +49,25 @@ class Project extends React.Component {
             <ProjectMeta
               project={this.props.project}
               canModify={canModify} />
-
           </div>
         </div>
 
         <div className="container page">
 
-          <div className="row project-content">
+          <div className="row article-content">
             <div className="col-xs-12">
 
+              <div classname="card-img">
+                <img src={this.props.project.projectImage}/>
+              </div>
+              <br/>
               <div dangerouslySetInnerHTML={markup}></div>
 
+              <br/>
+              <br/>
+
               <ul className="tag-list">
-                {
+                Tags:<br/>{
                   this.props.project.tagList.map(tag => {
                     return (
                       <li
@@ -72,13 +79,24 @@ class Project extends React.Component {
                   })
                 }
               </ul>
-
+              <br/>
+               <ul className="tag-list">
+                Componentes eletrônicos re-utilizados: <br/> {
+                  this.props.project.componentList.map(component => {
+                    return (
+                      <li
+                        className="tag-default tag-pill tag-primary"
+                        key={component}>
+                        {component}
+                      </li>
+                    );
+                  })
+                }
+              </ul>
             </div>
           </div>
-
           <hr />
-
-          <div className="project-actions">
+          <div className="article-actions">
           </div>
 
           <div className="row">

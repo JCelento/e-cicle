@@ -1,5 +1,5 @@
 using System.Linq;
-using EletronicPartsCatalog.Domain;
+using EletronicPartsCatalog.Api.Domain;
 using Microsoft.EntityFrameworkCore;
 
 namespace EletronicPartsCatalog.Features.Projects
@@ -12,6 +12,7 @@ namespace EletronicPartsCatalog.Features.Projects
                 .Include(x => x.Author)
                 .Include(x => x.ProjectFavorites)
                 .Include(x => x.ProjectTags)
+                .Include(x => x.ProjectComponents)
                 .AsNoTracking();
         }
     }

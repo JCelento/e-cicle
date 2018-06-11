@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using EletronicPartsCatalog.Domain;
+using EletronicPartsCatalog.Api.Domain;
 using EletronicPartsCatalog.Features.Users;
 using EletronicPartsCatalog.Infrastructure.Security;
 using Xunit;

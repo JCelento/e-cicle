@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EletronicPartsCatalog.Resources {
+namespace EletronicPartsCatalog.Api.Resources {
     using System;
     
     
@@ -39,7 +39,8 @@ namespace EletronicPartsCatalog.Resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EletronicPartsCatalog.Resources.Infrastructure.Errors.ErrorHandlingMiddleware", typeof(Infrastructure_Errors_ErrorHandlingMiddleware).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EletronicPartsCatalog.Api.Resources.Infrastructure.Errors.ErrorHandlingMiddleware" +
+                            "", typeof(Infrastructure_Errors_ErrorHandlingMiddleware).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

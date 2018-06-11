@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using EletronicPartsCatalog.Domain;
+using EletronicPartsCatalog.Api.Resources.Images;
+using EletronicPartsCatalog.Api.Domain;
 using EletronicPartsCatalog.Infrastructure;
 using FluentValidation;
 using MediatR;
@@ -17,11 +18,16 @@ namespace EletronicPartsCatalog.Features.Projects
         {
             public string Title { get; set; }
 
+            public string ProjectImage { get; set; }
+
             public string Description { get; set; }
 
             public string Body { get; set; }
 
             public string[] TagList { get; set; }
+        
+            public string[] ComponentList { get; set; }
+
         }
 
         public class ProjectDataValidator : AbstractValidator<ProjectData>
@@ -51,7 +57,6 @@ namespace EletronicPartsCatalog.Features.Projects
         {
             private readonly EletronicPartsCatalogContext _context;
             private readonly ICurrentUserAccessor _currentUserAccessor;
-
             public Handler(EletronicPartsCatalogContext context, ICurrentUserAccessor currentUserAccessor)
             {
                 _context = context;
@@ -61,6 +66,25 @@ namespace EletronicPartsCatalog.Features.Projects
             public async Task<ProjectEnvelope> Handle(Command message, CancellationToken cancellationToken)
             {
                 var author = await _context.Persons.FirstAsync(x => x.Username == _currentUserAccessor.GetCurrentUsername(), cancellationToken);
+
+                var components = new List<Component>();
+                foreach (var component in (message.Project.ComponentList ?? Enumerable.Empty<string>()))
+                {
+                    var c = await _context.Components.FindAsync(component);
+                    if (c == null)
+                    {
+                        c = new Component()
+                        {
+                            ComponentId = component,
+                            CreatedAt = DateTime.Now,
+                            UpdatedAt = DateTime.Now,
+                            Slug = component.GenerateSlug()
+                        };
+                        await _context.Components.AddAsync(c, cancellationToken);
+                        await _context.SaveChangesAsync(cancellationToken);
+                    }
+                    components.Add(c);
+                }
                 var tags = new List<Tag>();
                 foreach(var tag in (message.Project.TagList ?? Enumerable.Empty<string>()))
                 {
@@ -72,7 +96,6 @@ namespace EletronicPartsCatalog.Features.Projects
                             TagId = tag
                         };
                         await _context.Tags.AddAsync(t, cancellationToken);
-                        //save immediately for reuse
                         await _context.SaveChangesAsync(cancellationToken);
                     }
                     tags.Add(t);
@@ -85,10 +108,19 @@ namespace EletronicPartsCatalog.Features.Projects
                     CreatedAt = DateTime.UtcNow,
                     UpdatedAt = DateTime.UtcNow,
                     Description = message.Project.Description,
+                    ProjectImage = string.IsNullOrEmpty(message.Project.ProjectImage) ? ImagePath.ImageNotProvided : message.Project.ProjectImage,
                     Title = message.Project.Title,
                     Slug = message.Project.Title.GenerateSlug()
                 };
                 await _context.Projects.AddAsync(Project, cancellationToken);
+
+                await _context.ProjectComponents.AddRangeAsync(components.Select(x => new ProjectComponent()
+                {
+                    Project = Project,
+                    Component = x
+                }), cancellationToken);
+
+                await _context.SaveChangesAsync(cancellationToken);
 
                 await _context.ProjectTags.AddRangeAsync(tags.Select(x => new ProjectTag()
                 {

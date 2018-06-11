@@ -1,4 +1,4 @@
-using EletronicPartsCatalog.Domain;
+using EletronicPartsCatalog.Api.Domain;
 
 namespace EletronicPartsCatalog.Features.Projects
 {

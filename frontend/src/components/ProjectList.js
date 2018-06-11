@@ -5,13 +5,13 @@ import React from 'react';
 const ProjectList = props => {
   if (!props.projects) {
     return (
-      <div className="project-preview">Carregando...</div>
+      <div className="article-preview">Carregando...</div>
     );
   }
 
   if (props.projects.length === 0) {
     return (
-      <div className="project-preview">
+      <div className="article-preview">
         Não encontramos nenhum projeto para mostrar :(
       </div>
     );

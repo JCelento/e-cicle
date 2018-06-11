@@ -7,6 +7,7 @@ import { Route, Switch } from 'react-router-dom';
 import Project from '../components/Project';
 import Editor from '../components/Editor';
 import Home from '../components/Home';
+import Component from '../components/Component';
 import Login from '../components/Login';
 import Profile from '../components/Profile';
 import ProfileFavorites from '../components/ProfileFavorites';
@@ -14,6 +15,7 @@ import Register from '../components/Register';
 import Settings from '../components/Settings';
 import { store } from '../store';
 import { push } from 'react-router-redux';
+import EditorComponent from './EditorComponent';
 
 const mapStateToProps = state => {
   return {
@@ -33,7 +35,6 @@ const mapDispatchToProps = dispatch => ({
 class App extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.redirectTo) {
-      // this.context.router.replace(nextProps.redirectTo);
       store.dispatch(push(nextProps.redirectTo));
       this.props.onRedirect();
     }
@@ -61,7 +62,10 @@ class App extends React.Component {
             <Route path="/register" component={Register} />
             <Route path="/editor/:slug" component={Editor} />
             <Route path="/editor" component={Editor} />
+            <Route path="/editor-component" component={EditorComponent}/>
+            <Route path="/editor-component/:slug" component={EditorComponent}/>
             <Route path="/project/:id" component={Project} />
+            <Route path="/component/:slug" component={Component} />
             <Route path="/settings" component={Settings} />
             <Route path="/@:username/favorites" component={ProfileFavorites} />
             <Route path="/@:username" component={Profile} />
@@ -78,9 +82,5 @@ class App extends React.Component {
     );
   }
 }
-
-// App.contextTypes = {
-//   router: PropTypes.object.isRequired
-// };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

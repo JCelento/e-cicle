@@ -28,7 +28,7 @@ const Tags = props => {
     );
   } else {
     return (
-      <div>Loading Tags...</div>
+      <div>Carregando Tags...</div>
     );
   }
 };
