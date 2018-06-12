@@ -1,4 +1,7 @@
 # e-Cicle 
+
+![Alt Text](https://media.giphy.com/media/i3otJcGC9pxzXdGb5Z/giphy.gif)
+
 ## plataforma de compartilhamento de projetos usando componentes eletrônicos retirados do e-waste
 
 Foram utilizados no desenvolvimento:
