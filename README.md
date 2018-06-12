@@ -6,7 +6,7 @@
 
 Foram utilizados no desenvolvimento:
 - Asp Net Core 2.0 https://www.microsoft.com/net/download/dotnet-core/sdk-2.1.4
-- npm(node 6.5.9) https://nodejs.org/download/release/v6.9.5/node-v6.9.5-x64.msi ou maior
+- npm(node 8.11.2) https://nodejs.org/en/blog/release/v8.11.2/ ou maior
 - Javascript
 - React Redux
 - SQLExpress e SQL Server Management Studio https://www.microsoft.com/en-us/download/confirmation.aspx?id=42299
