@@ -3,6 +3,7 @@ import {
   REDIRECT,
   LOGOUT,
   PROJECT_SUBMITTED,
+  COMPONENT_SUBMITTED,
   SETTINGS_SAVED,
   LOGIN,
   REGISTER,
@@ -37,8 +38,11 @@ export default (state = defaultState, action) => {
     case LOGOUT:
       return { ...state, redirectTo: '/', token: null, currentUser: null };
     case PROJECT_SUBMITTED:
-      const redirectUrl = `/project/${action.payload.project.slug}`;
-      return { ...state, redirectTo: redirectUrl };
+      const redirectUrlProj = `/project/${action.payload.project.slug}`;
+      return { ...state, redirectTo: redirectUrlProj };
+    case COMPONENT_SUBMITTED:
+      const redirectUrlComp = `/component/${action.payload.component.slug}`;
+      return { ...state, redirectTo: redirectUrlComp };
     case SETTINGS_SAVED:
       return {
         ...state,

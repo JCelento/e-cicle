@@ -23,7 +23,7 @@ const ComponentActions = props => {
           className="btn btn-outline-secondary btn-sm">
           <i className="ion-edit"></i> Editar componente
         </Link>
-
+        &nbsp; &nbsp;
         <button className="btn btn-outline-danger btn-sm" onClick={del}>
           <i className="ion-trash-a"></i> Deletar componente
         </button>

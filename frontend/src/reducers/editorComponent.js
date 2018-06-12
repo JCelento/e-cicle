@@ -14,7 +14,7 @@ export default (state = {}, action) => {
       return {
         ...state,
         componentSlug: action.payload ? action.payload.component.slug : '',
-        name: action.payload ? action.payload.component.name : '',
+        name: action.payload ? action.payload.component.componentId : '',
         description: action.payload ? action.payload.component.description : '',
         componentImage: action.payload ? action.payload.component.componentImage : '',
         whereToFindItInput: '',

@@ -2,13 +2,15 @@ import Banner from './Banner';
 import MainView from './MainView';
 import React from 'react';
 import Tags from './Tags';
+import Components from './Components';
 import agent from '../../agent';
 import marked from 'marked';
 import { connect } from 'react-redux';
 import {
   HOME_PAGE_LOADED,
   HOME_PAGE_UNLOADED,
-  APPLY_TAG_FILTER
+  APPLY_TAG_FILTER,
+  APPLY_SEARCH_FILTER
 } from '../../constants/actionTypes';
 
 const Promise = global.Promise;
@@ -22,6 +24,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   onClickTag: (tag, pager, payload) =>
     dispatch({ type: APPLY_TAG_FILTER, tag, pager, payload }),
+  onClickComponent: (component, pager, payload) =>
+    dispatch({ type: APPLY_SEARCH_FILTER, component, pager, payload }),
   onLoad: (tab, pager, payload) =>
     dispatch({ type: HOME_PAGE_LOADED, tab, pager, payload }),
   onUnload: () =>
@@ -35,7 +39,7 @@ class Home extends React.Component {
       agent.Projects.feed :
       agent.Projects.all;
 
-    this.props.onLoad(tab, projectsPromise, Promise.all([agent.Tags.getAll(), projectsPromise()]));
+    this.props.onLoad(tab, projectsPromise, Promise.all([agent.Tags.getAll(), agent.Components.all(), projectsPromise()]));
   }
 
   componentWillUnmount() {
@@ -60,6 +64,13 @@ class Home extends React.Component {
                 <Tags
                   tags={this.props.tags}
                   onClickTag={this.props.onClickTag} />
+
+                  
+                <p>Componentes Populares</p>
+
+                <Components
+                  components={this.props.components}
+                  onClickComponent={this.props.onClickComponent} />
 
               </div>
             </div>

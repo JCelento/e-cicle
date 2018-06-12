@@ -3,6 +3,7 @@ import {
   PROJECT_UNFAVORITED,
   SET_PAGE,
   APPLY_TAG_FILTER,
+  APPLY_SEARCH_FILTER,
   HOME_PAGE_LOADED,
   HOME_PAGE_UNLOADED,
   CHANGE_TAB,
@@ -44,6 +45,16 @@ export default (state = {}, action) => {
         projectsCount: action.payload.projectsCount,
         tab: null,
         tag: action.tag,
+        currentPage: 0
+      };
+      case APPLY_SEARCH_FILTER:
+      return {
+        ...state,
+        pager: action.pager,
+        projects: action.payload.projects,
+        projectsCount: action.payload.projectsCount,
+        tab: null,
+        component: action.component.componentId,
         currentPage: 0
       };
     case HOME_PAGE_LOADED:

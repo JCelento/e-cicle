@@ -2,7 +2,6 @@ import ListErrors from './ListErrors';
 import React from 'react';
 import agent from '../agent';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router';
 import {
   ADD_WHERE_TO_FIND,
   EDITOR_COMPONENT_PAGE_LOADED,
@@ -13,7 +12,7 @@ import {
 } from '../constants/actionTypes';
 
 const mapStateToProps = state => ({
-  ...state.editorComponent
+  ...state.editor
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -67,8 +66,8 @@ class EditorComponent extends React.Component {
         whereToFindItList: this.props.whereToFindItList
       };
 
-      const slug = { slug: this.props.componentSlug };
-      const promise = this.props.componentSlug ?
+      const slug = { slug: this.props.match.params.slug };
+      const promise = this.props.match.params.slug ?
         agent.Components.update(Object.assign(component, slug)) :
         agent.Components.create(component);
 
@@ -100,12 +99,6 @@ class EditorComponent extends React.Component {
   }
 
   render() {
-
-    if (this.state.redirectToNewPage) {
-      return (
-      <Redirect to="/"/>
-      )
-    }
 
     return (
       <div className="editor-page">
@@ -158,7 +151,7 @@ class EditorComponent extends React.Component {
                       {
                         (this.props.whereToFindItList || []).map(whereToFindIt => {
                           return (
-                            <span className="tag-default tag-pill" key={whereToFindIt}>
+                            <span className="tag-default tag-pill tag-info" key={whereToFindIt}>
                               <i  className="ion-close-round"
                                   onClick={this.removewhereToFindItHandler(whereToFindIt)}>
                               </i>

@@ -40,7 +40,7 @@ class Component extends React.Component {
 
         <div className="banner">
           <div className="container">
-          <div className="col-xs-12 offset-md-5">
+          <div className="col-xs-12">
             <h1>{this.props.component.componentId}</h1>
             <ComponentMeta
               component={this.props.component}

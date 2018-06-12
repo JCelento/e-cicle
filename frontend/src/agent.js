@@ -75,6 +75,8 @@ const Projects = {
 const Components = {
 get: slug =>
   requests.get(`/components/${slug}`),
+all: page =>
+  requests.get(`/components?`),
 update: component =>
   requests.put(`/components/${component.slug}`, { component: omitComponentSlug(component) }),
 create: component =>

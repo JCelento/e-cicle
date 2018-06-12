@@ -201,7 +201,7 @@ class Editor extends React.Component {
                       {
                         (this.props.componentList || []).map(component => {
                           return (
-                            <span className="tag-default tag-pill" key={component}>
+                            <span className="tag-default tag-pill tag-primary" key={component}>
                               <i  className="ion-close-round"
                                   onClick={this.removeComponentHandler(component)}>
                               </i>

@@ -55,10 +55,25 @@ const TagFilterTab = props => {
   );
 };
 
+const ComponentFilterTab = props => {
+  if (!props.component) {
+    return null;
+  }
+
+  return (
+    <li className="nav-item">
+      <a href="" className="nav-link active">
+        <i className="ion-pound"></i> {props.component}
+      </a>
+    </li>
+  );
+};
+
 const mapStateToProps = state => ({
   ...state.projectList,
   tags: state.home.tags,
-  token: state.common.token
+  token: state.common.token,
+  components: state.home.components
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -79,6 +94,8 @@ const MainView = props => {
           <GlobalFeedTab tab={props.tab} onTabClick={props.onTabClick} />
 
           <TagFilterTab tag={props.tag} />
+
+          <ComponentFilterTab component={props.component} />
 
         </ul>
       </div>
