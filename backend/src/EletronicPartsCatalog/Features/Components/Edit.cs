@@ -15,8 +15,7 @@ namespace EletronicPartsCatalog.Features.Components
     {
         public class ComponentData
         {
-            public string Name { get; set; }
-
+ 
             public string ComponentImage { get; set; }
 
             public string Description { get; set; }
@@ -57,7 +56,6 @@ namespace EletronicPartsCatalog.Features.Components
                 }
 
 
-                component.ComponentId = message.Component.Name ?? component.ComponentId;
                 component.ComponentImage = message.Component.ComponentImage ?? component.ComponentImage;
                 component.Description = message.Component.Description ?? component.Description;
                 component.Slug = component.ComponentId.GenerateSlug();

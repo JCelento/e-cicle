@@ -57,7 +57,7 @@ class Project extends React.Component {
           <div className="row article-content">
             <div className="col-xs-12">
 
-              <div classname="card-img">
+              <div className="card-img">
                 <img src={this.props.project.projectImage}/>
               </div>
               <br/>
