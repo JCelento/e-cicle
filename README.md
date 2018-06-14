@@ -37,6 +37,8 @@ Foram utilizados no desenvolvimento:
 - no cmd, a partir da pasta frontend <br />
 ``` npm install ```
 
+``` npm install cross-env -g```
+
 - iniciar a aplicação <br />
 ``` npm start ```
 
