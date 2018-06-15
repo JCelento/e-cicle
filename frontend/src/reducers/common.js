@@ -4,6 +4,7 @@ import {
   LOGOUT,
   PROJECT_SUBMITTED,
   COMPONENT_SUBMITTED,
+  DELETE_COMPONENT,
   SETTINGS_SAVED,
   LOGIN,
   REGISTER,
@@ -58,6 +59,8 @@ export default (state = defaultState, action) => {
         currentUser: action.error ? null : action.payload.user
       };
     case DELETE_PROJECT:
+      return { ...state, redirectTo: '/' };
+    case DELETE_COMPONENT:
       return { ...state, redirectTo: '/' };
     case PROJECT_PAGE_UNLOADED:
     case EDITOR_PAGE_UNLOADED:

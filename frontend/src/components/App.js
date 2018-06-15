@@ -62,8 +62,8 @@ class App extends React.Component {
             <Route path="/register" component={Register} />
             <Route path="/editor/:slug" component={Editor} />
             <Route path="/editor" component={Editor} />
-            <Route path="/editor-component" component={EditorComponent}/>
             <Route path="/editor-component/:slug" component={EditorComponent}/>
+            <Route path="/editor-component" component={EditorComponent}/>
             <Route path="/project/:id" component={Project} />
             <Route path="/component/:slug" component={Component} />
             <Route path="/settings" component={Settings} />

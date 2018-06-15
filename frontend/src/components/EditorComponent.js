@@ -116,7 +116,7 @@ class EditorComponent extends React.Component {
                     <input
                       className="form-control form-control-lg"
                       type="text"
-                      placeholder="Nome do componente eletrônico"
+                      placeholder="Nome do componente"
                       value={this.props.name}
                       onChange={this.changeName} />
                   </fieldset>
@@ -169,7 +169,7 @@ class EditorComponent extends React.Component {
                     type="button"
                     disabled={this.props.inProgress}
                     onClick={this.submitForm}>
-                    Publicar Projeto
+                    Publicar Componente
                   </button>
 
                 </fieldset>
