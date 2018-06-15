@@ -35,21 +35,18 @@ class SearchBar extends React.Component {
       <div>
               <form onSubmit={this.submitForm(search)}>
                 <fieldset>
-                  <fieldset className="form-group">
+                  <fieldset className="form-group form-inline">
                     <input
-                      className="form-control form-control-lg"
+                      className="form-control form-control-sm"
                       type="text"
                       placeholder="O que procura?"
                       value={search}
                       onChange={this.changeSearch} />
-                  </fieldset>
-                  <button
-                    className="btn btn-lg btn-primary pull-xs-right"
-                    type="submit"
-                    disabled={this.props.inProgress}>
-                    Buscar
+                    <button
+                    className="ion-search btn btn-sm"
+                    type="submit">
                   </button>
-
+                  </fieldset>
                 </fieldset>
               </form>
             </div>
