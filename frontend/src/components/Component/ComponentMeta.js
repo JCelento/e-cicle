@@ -1,5 +1,4 @@
 import ComponentActions from './ComponentActions';
-import { Link } from 'react-router-dom';
 import React from 'react';
 import { formatDate } from '../../util.js';
 

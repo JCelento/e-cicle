@@ -75,6 +75,8 @@ const Projects = {
 const Components = {
 get: slug =>
   requests.get(`/components/${slug}`),
+del: slug =>
+  requests.del(`/components/${slug}`),
 all: page =>
   requests.get(`/components?`),
 update: component =>

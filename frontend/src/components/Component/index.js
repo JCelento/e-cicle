@@ -87,15 +87,20 @@ class Component extends React.Component {
           <div className="component-actions">
           </div>
         </div>
-
-        <div className="col-xs-12 offset-md-5">
-            <p>
-              <Link to="/login">Faça Login</Link>
-              &nbsp;ou&nbsp;
-              <Link to="/register">Cadastre-se</Link>
-            </p>
-            </div>      </div>
+     </div>
     );
+
+    if(this.props.currentUser == null){
+      return(
+        <div className="col-xs-12 offset-md-5">
+        <p>
+          <Link to="/login">Faça Login</Link>
+          &nbsp;ou&nbsp;
+          <Link to="/register">Cadastre-se</Link>
+        </p>
+        </div> 
+      );
+    }
   }
 }
 

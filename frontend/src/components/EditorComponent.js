@@ -8,11 +8,11 @@ import {
   REMOVE_WHERE_TO_FIND,
   COMPONENT_SUBMITTED,
   EDITOR_COMPONENT_PAGE_UNLOADED,
-  UPDATE_FIELD_EDITOR
+  UPDATE_FIELD_COMPONENT_EDITOR
 } from '../constants/actionTypes';
 
 const mapStateToProps = state => ({
-  ...state.editor
+  ...state.editorComponent
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -27,13 +27,14 @@ const mapDispatchToProps = dispatch => ({
   onUnload: payload =>
     dispatch({ type: EDITOR_COMPONENT_PAGE_UNLOADED }),
   onUpdateField: (key, value) =>
-    dispatch({ type: UPDATE_FIELD_EDITOR, key, value })
+    dispatch({ type: UPDATE_FIELD_COMPONENT_EDITOR, key, value })
 });
 
 class EditorComponent extends React.Component {
 
   state = {
-    redirectToNewPage: false
+    redirectToNewPage: false,
+    disabled: false
   }
 
   constructor() {
@@ -66,8 +67,8 @@ class EditorComponent extends React.Component {
         whereToFindItList: this.props.whereToFindItList
       };
 
-      const slug = { slug: this.props.match.params.slug };
-      const promise = this.props.match.params.slug ?
+      const slug = { slug: this.props.componentSlug };
+      const promise = this.props.componentSlug ?
         agent.Components.update(Object.assign(component, slug)) :
         agent.Components.create(component);
 
@@ -138,11 +139,11 @@ class EditorComponent extends React.Component {
                       onChange={this.changeDescription} />
                   </fieldset>
 
-                  <fieldset className="form-group">
+                    <fieldset className="form-group">
                     <input
                       className="form-control"
                       type="text"
-                      placeholder="Onde podemos encontrar esse componente?"
+                      placeholder="Quais componentes eletronicos utilizou?"
                       value={this.props.whereToFindItInput}
                       onChange={this.changewhereToFindItInput}
                       onKeyUp={this.watchForEnter} />
@@ -168,7 +169,7 @@ class EditorComponent extends React.Component {
                     type="button"
                     disabled={this.props.inProgress}
                     onClick={this.submitForm}>
-                    Publicar Componente
+                    Publicar Projeto
                   </button>
 
                 </fieldset>
