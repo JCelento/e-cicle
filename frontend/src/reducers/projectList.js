@@ -54,7 +54,7 @@ export default (state = {}, action) => {
         projects: action.payload.projects,
         projectsCount: action.payload.projectsCount,
         tab: null,
-        component: action.component.componentId,
+        search: action.search,
         currentPage: 0
       };
     case HOME_PAGE_LOADED:

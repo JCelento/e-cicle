@@ -3,6 +3,7 @@ import MainView from './MainView';
 import React from 'react';
 import Tags from './Tags';
 import Components from './Components';
+import SearchBar from '../SearchBar';
 import agent from '../../agent';
 import marked from 'marked';
 import { connect } from 'react-redux';
@@ -58,6 +59,8 @@ class Home extends React.Component {
 
             <div className="col-md-3">
               <div className="sidebar">
+              
+              <SearchBar />
 
                 <p>Tags Populares</p>
 
