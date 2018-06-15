@@ -5,7 +5,6 @@ import Tags from './Tags';
 import Components from './Components';
 import SearchBar from '../SearchBar';
 import agent from '../../agent';
-import marked from 'marked';
 import { connect } from 'react-redux';
 import {
   HOME_PAGE_LOADED,

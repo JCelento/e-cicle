@@ -118,6 +118,7 @@ class EditorComponent extends React.Component {
                       type="text"
                       placeholder="Nome do componente"
                       value={this.props.name}
+                      required="required"
                       onChange={this.changeName} />
                   </fieldset>
 
@@ -143,7 +144,8 @@ class EditorComponent extends React.Component {
                     <input
                       className="form-control"
                       type="text"
-                      placeholder="Quais componentes eletronicos utilizou?"
+                      placeholder="Onde podemos encontrar esses componentes ?"
+                      required="required"
                       value={this.props.whereToFindItInput}
                       onChange={this.changewhereToFindItInput}
                       onKeyUp={this.watchForEnter} />

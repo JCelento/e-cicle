@@ -62,13 +62,14 @@ export default (state = {}, action) => {
         ...state,
         pager: action.pager,
         tags: action.payload[0].tags,
-        projects: action.payload[1].projects,
-        projectsCount: action.payload[1].projectsCount,
+        components: action.payload[1].components,
+        projects: action.payload[2].projects,
+        projectsCount: action.payload[2].projectsCount,
         currentPage: 0,
         tab: action.tab
       };
     case HOME_PAGE_UNLOADED:
-      return {};
+    return { ...state, viewChangeCounter: state.viewChangeCounter + 1 };
     case CHANGE_TAB:
       return {
         ...state,

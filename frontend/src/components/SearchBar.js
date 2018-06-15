@@ -3,7 +3,6 @@ import agent from '../agent';
 import { connect } from 'react-redux';
 import {
   UPDATE_FIELD_SEARCH,
-  SEARCH,
   APPLY_SEARCH_FILTER
 } from '../constants/actionTypes';
 

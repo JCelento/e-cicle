@@ -50,8 +50,19 @@ namespace EletronicPartsCatalog.Features.Projects
 
                 if (message.IsFeed && _currentUserAccessor.GetCurrentUsername() != null)
                 {
-                    var currentUser = await _context.Persons.Include(x => x.Following).FirstOrDefaultAsync(x => x.Username == _currentUserAccessor.GetCurrentUsername(), cancellationToken);
-                    queryable = queryable.Where(x => currentUser.Following.Select(y => y.TargetId).Contains(x.Author.PersonId));
+                    var currentUser = await _context.Persons.FirstOrDefaultAsync(x => x.Username == _currentUserAccessor.GetCurrentUsername(), cancellationToken);
+
+                    var followed = from p in _context.Persons
+                                      from f in _context.FollowedPeople
+                                      where f.ObserverId == currentUser.PersonId
+                                      select f;
+
+                    queryable = queryable.Where(x => followed.Select(y => y.TargetId).Contains(x.Author.PersonId));
+
+                    if(!queryable.Any())
+                    {
+                        return new ProjectsEnvelope();
+                    }
                 }
 
                 if (!string.IsNullOrWhiteSpace(message.Tag))

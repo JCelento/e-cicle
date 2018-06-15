@@ -157,7 +157,7 @@ class Settings extends React.Component {
               <button
                 className="btn btn-outline-danger"
                 onClick={this.props.onClickLogout}>
-                Ou clique aqui para fazer logoff.
+                Ou clique aqui para fazer logoff
               </button>
 
             </div>

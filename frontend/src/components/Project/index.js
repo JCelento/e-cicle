@@ -58,7 +58,7 @@ class Project extends React.Component {
             <div className="col-xs-12">
 
               <div className="card-img">
-                <img src={this.props.project.projectImage} alt={this.props.project.slug}/>
+                <img src={this.props.project.projectImage} alt={this.props.project.slug}  width="500px"/>
               </div>
               <br/>
               <div dangerouslySetInnerHTML={markup}></div>
