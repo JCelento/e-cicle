@@ -9,7 +9,7 @@ export default (state = {}, action) => {
         components: action.payload[1].components
       };
     case HOME_PAGE_UNLOADED:
-      return {};
+      return { };
     default:
       return state;
   }

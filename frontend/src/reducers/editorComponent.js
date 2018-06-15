@@ -5,7 +5,7 @@ import {
   ASYNC_START,
   ADD_WHERE_TO_FIND,
   REMOVE_WHERE_TO_FIND,
-  UPDATE_FIELD_EDITOR
+  UPDATE_FIELD_COMPONENT_EDITOR
 } from '../constants/actionTypes';
 
 export default (state = {}, action) => {
@@ -45,7 +45,7 @@ export default (state = {}, action) => {
         whereToFindItList: state.whereToFindItList.filter(whereToFindIt => whereToFindIt !== action.whereToFindIt)
       };
 
-    case UPDATE_FIELD_EDITOR:
+    case UPDATE_FIELD_COMPONENT_EDITOR:
       return { ...state, [action.key]: action.value };
     default:
       return state;

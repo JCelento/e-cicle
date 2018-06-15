@@ -71,9 +71,9 @@ const ComponentFilterTab = props => {
 
 const mapStateToProps = state => ({
   ...state.projectList,
+  components: state.home.components,
   tags: state.home.tags,
-  token: state.common.token,
-  components: state.home.components
+  token: state.common.token
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -52,7 +52,7 @@ class Component extends React.Component {
         <div className="container page">
 
         <Link to={`/@${this.props.component.slug}`}>
-            <img src={this.props.component.componentImage} alt={this.props.component.slug} />
+            <img src={this.props.component.componentImage} alt={this.props.component.slug} width="500px"/>
             </Link>
           <br/>
           <br/>
@@ -87,15 +87,9 @@ class Component extends React.Component {
           <div className="component-actions">
           </div>
         </div>
-
-        <div className="col-xs-12 offset-md-5">
-            <p>
-              <Link to="/login">Faça Login</Link>
-              &nbsp;ou&nbsp;
-              <Link to="/register">Cadastre-se</Link>
-            </p>
-            </div>      </div>
+     </div>
     );
+
   }
 }
 

@@ -4,6 +4,7 @@ import {
   LOGOUT,
   PROJECT_SUBMITTED,
   COMPONENT_SUBMITTED,
+  DELETE_COMPONENT,
   SETTINGS_SAVED,
   LOGIN,
   REGISTER,
@@ -15,7 +16,9 @@ import {
   PROFILE_FAVORITES_PAGE_UNLOADED,
   SETTINGS_PAGE_UNLOADED,
   LOGIN_PAGE_UNLOADED,
-  REGISTER_PAGE_UNLOADED
+  REGISTER_PAGE_UNLOADED,
+  UPDATE_FIELD_SEARCH,
+  SEARCH
 } from '../constants/actionTypes';
 
 const defaultState = {
@@ -59,6 +62,12 @@ export default (state = defaultState, action) => {
       };
     case DELETE_PROJECT:
       return { ...state, redirectTo: '/' };
+    case DELETE_COMPONENT:
+      return { ...state, redirectTo: '/' };
+    case UPDATE_FIELD_SEARCH:
+      return { ...state, [action.key]: action.value };
+    case SEARCH:
+      return {...state, projects: action.payload[0].projects};  
     case PROJECT_PAGE_UNLOADED:
     case EDITOR_PAGE_UNLOADED:
     case HOME_PAGE_UNLOADED:

@@ -3,6 +3,15 @@ import ListPagination from './ListPagination';
 import React from 'react';
 
 const ProjectList = props => {
+  if (props.projectsCount === 0) {
+    return (
+      <div className="article-preview">
+        Não encontramos nenhum projeto para mostrar :(
+      </div>
+    );
+  }
+
+  
   if (!props.projects) {
     return (
       <div className="article-preview">Carregando...</div>
