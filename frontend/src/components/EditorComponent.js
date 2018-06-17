@@ -34,7 +34,6 @@ class EditorComponent extends React.Component {
 
   state = {
     redirectToNewPage: false,
-    disabled: false
   }
 
   constructor() {
@@ -48,10 +47,8 @@ class EditorComponent extends React.Component {
     this.changewhereToFindItInput = updateFieldEvent('whereToFindItInput');
 
     this.watchForEnter = ev => {
-      if (ev.keyCode === 13) {
         ev.preventDefault();
         this.props.onAddwhereToFindIt();
-      }
     };
 
     this.removewhereToFindItHandler = whereToFindIt => () => {
@@ -116,7 +113,7 @@ class EditorComponent extends React.Component {
                     <input
                       className="form-control form-control-lg"
                       type="text"
-                      placeholder="Nome do componente"
+                      placeholder="Nome do componente*"
                       value={this.props.name}
                       required="required"
                       onChange={this.changeName} />
@@ -135,20 +132,27 @@ class EditorComponent extends React.Component {
                     <textarea
                     className="form-control"
                     rows="8"
-                      placeholder="Breve descrição do componente"
+                      placeholder="Breve descrição do componente*"
                       value={this.props.description}
                       onChange={this.changeDescription} />
                   </fieldset>
+
+                  <button
+                    className="btn pull-xs-right btn-primary"
+                    type="button"
+                    onClick={this.watchForEnter}>
+                   <b>Adicionar</b>
+                  </button>
 
                     <fieldset className="form-group">
                     <input
                       className="form-control"
                       type="text"
-                      placeholder="Onde podemos encontrar esses componentes ?"
+                      placeholder="Onde podemos encontrar esses componentes?* "
                       required="required"
                       value={this.props.whereToFindItInput}
                       onChange={this.changewhereToFindItInput}
-                      onKeyUp={this.watchForEnter} />
+                       />
 
                     <div className="tag-list">
                       {
@@ -169,7 +173,6 @@ class EditorComponent extends React.Component {
                   <button
                     className="btn btn-lg pull-xs-right btn-primary"
                     type="button"
-                    disabled={this.props.inProgress}
                     onClick={this.submitForm}>
                     Publicar Componente
                   </button>

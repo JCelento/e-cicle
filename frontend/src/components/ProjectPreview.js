@@ -66,7 +66,9 @@ const ProjectPreview = props => {
         </Link>
         </div>
         <p>{project.description}</p>
-        <span>Continue lendo... </span>
+        <Link to={`project/${project.slug}`}>
+          Continue lendo... 
+          </Link>
         <ul className="tag-list">
           {
             project.tagList.map(tag => {

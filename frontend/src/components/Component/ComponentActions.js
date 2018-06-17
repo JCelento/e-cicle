@@ -24,7 +24,7 @@ const ComponentActions = props => {
           <i className="ion-edit"></i> Editar componente
         </Link>
         &nbsp; &nbsp;
-        <button className="btn btn-outline-danger btn-sm" onClick={del}>
+        <button className="btn btn-danger btn-sm pull-xs-right" onClick={del}>
           <i className="ion-trash-a"></i> Deletar componente
         </button>
 

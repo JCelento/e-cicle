@@ -51,10 +51,8 @@ class Editor extends React.Component {
     this.changeProjectImage = updateFieldEvent('projectImage');
 
     this.watchForEnterTag = ev => {
-      if (ev.keyCode === 13) {
         ev.preventDefault();
         this.props.onAddTag();
-      }
     };
 
     this.removeTagHandler = tag => () => {
@@ -62,10 +60,8 @@ class Editor extends React.Component {
     };
 
     this.watchForEnterComponent = ev => {
-      if (ev.keyCode === 13) {
         ev.preventDefault();
         this.props.onAddComponent();
-      }
     };
 
     this.removeComponentHandler = component => () => {
@@ -130,7 +126,7 @@ class Editor extends React.Component {
                     <input
                       className="form-control form-control-lg"
                       type="text"
-                      placeholder="Título"
+                      placeholder="Título*"
                       value={this.props.title}
                       onChange={this.changeTitle} />
                   </fieldset>
@@ -148,7 +144,7 @@ class Editor extends React.Component {
                     <input
                       className="form-control"
                       type="text"
-                      placeholder="Breve descrição do seu projeto"
+                      placeholder="Breve descrição do seu projeto*"
                       value={this.props.description}
                       onChange={this.changeDescription} />
                   </fieldset>
@@ -163,14 +159,22 @@ class Editor extends React.Component {
                     </textarea>
                   </fieldset>
 
+                  <button
+                    className="btn pull-xs-right btn-primary"
+                    type="button"
+                    onClick={this.watchForEnterTag}>
+                   <b>Adicionar tag</b>
+                  </button>
+
+
                   <fieldset className="form-group">
                     <input
                       className="form-control"
                       type="text"
-                      placeholder="Atribua tags"
+                      placeholder="Atribua tags*"
                       value={this.props.tagInput}
                       onChange={this.changeTagInput}
-                      onKeyUp={this.watchForEnterTag} />
+                      />
 
                     <div className="tag-list">
                       {
@@ -188,14 +192,21 @@ class Editor extends React.Component {
                     </div>
                   </fieldset>
 
+                  <button
+                    className="btn pull-xs-right btn-primary"
+                    type="button"
+                    onClick={this.watchForEnterComponent}>
+                   <b>Adicionar Componente</b>
+                  </button>
+
                   <fieldset className="form-group">
                     <input
                       className="form-control"
                       type="text"
-                      placeholder="Quais componentes eletronicos utilizou?"
+                      placeholder="Quais componentes eletronicos utilizou?*"
                       value={this.props.componentInput}
                       onChange={this.changeComponentInput}
-                      onKeyUp={this.watchForEnterComponent} />
+                       />
 
                     <div className="tag-list">
                       {
@@ -216,7 +227,6 @@ class Editor extends React.Component {
                   <button
                     className="btn btn-lg pull-xs-right btn-primary"
                     type="button"
-                    disabled={this.props.inProgress}
                     onClick={this.submitForm}>
                     Publicar Projeto
                   </button>
