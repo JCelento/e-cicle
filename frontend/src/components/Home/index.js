@@ -1,4 +1,5 @@
 import Banner from './Banner';
+import Description from './Description';
 import MainView from './MainView';
 import React from 'react';
 import Tags from './Tags';
@@ -52,6 +53,8 @@ class Home extends React.Component {
 
         <Banner token={this.props.token} appName={this.props.appName} />
 
+        <Description token={this.props.token}/>
+
         <div className="container page">
           <div className="row">
             <MainView />
@@ -61,15 +64,15 @@ class Home extends React.Component {
               
               <SearchBar />
 
-                <p>Tags Populares</p>
+                <p>Tags Populares <i className="ion-ios-pricetag-outline"></i></p>
 
                 <Tags
                   tags={this.props.tags}
                   onClickTag={this.props.onClickTag} />
 
                   
-                <p>Componentes Populares</p>
-
+                <p>Componentes Populares <i className="ion-ios-cog-outline"></i></p>
+                
                 <Components
                   components={this.props.components}
                   onClickComponent={this.props.onClickComponent} />

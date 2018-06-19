@@ -14,8 +14,10 @@ const mapStateToProps = state => ({ ...state.auth });
 const mapDispatchToProps = dispatch => ({
   onChangeEmail: value =>
     dispatch({ type: UPDATE_FIELD_AUTH, key: 'email', value }),
+  onChangePasswordConfirmation: value =>
+    dispatch({ type: UPDATE_FIELD_AUTH, key: 'passwordConfirmation', value }),
   onChangePassword: value =>
-    dispatch({ type: UPDATE_FIELD_AUTH, key: 'password', value }),
+    dispatch({ type: UPDATE_FIELD_AUTH, key: 'password', value }),    
   onChangeUsername: value =>
     dispatch({ type: UPDATE_FIELD_AUTH, key: 'username', value }),
   onSubmit: (username, email, password) => {

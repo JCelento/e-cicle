@@ -141,7 +141,7 @@ class EditorComponent extends React.Component {
                     className="btn pull-xs-right btn-primary"
                     type="button"
                     onClick={this.watchForEnter}>
-                   <b>Adicionar</b>
+                   Adicionar
                   </button>
 
                     <fieldset className="form-group">

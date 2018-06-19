@@ -45,7 +45,7 @@ class Project extends React.Component {
         <div className="banner">
           <div className="container">
 
-            <h1>{this.props.project.title}</h1>
+            <h1>{this.props.project.title} <i className="ion-ios-lightbulb-outline"></i></h1>
             <ProjectMeta
               project={this.props.project}
               canModify={canModify} />
@@ -73,7 +73,7 @@ class Project extends React.Component {
                       <li
                         className="tag-default tag-pill tag-outline"
                         key={tag}>
-                        {tag}
+                        <i className="ion-ios-pricetag-outline"></i> {tag}
                       </li>
                     );
                   })
@@ -87,7 +87,7 @@ class Project extends React.Component {
                       <li
                         className="tag-default tag-pill tag-primary"
                         key={component}>
-                        {component}
+                        <i className="ion-ios-cog-outline"></i> {component}
                       </li>
                     );
                   })
