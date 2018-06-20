@@ -59,7 +59,7 @@ const ProjectPreview = props => {
       </div>
 
       <Link to={`/project/${project.slug}`} className="preview-link"/>
-        <h1>{project.title} <i className="ion-ios-lightbulb-outline"></i></h1>
+        <h1><i className="ion-ios-lightbulb-outline"></i> {project.title}</h1>
         <div className="project-meta">
         <Link to={`project/${project.slug}`}>
           <img src={project.projectImage} alt={project.slug} width="500px"/>

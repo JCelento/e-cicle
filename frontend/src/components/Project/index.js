@@ -45,7 +45,7 @@ class Project extends React.Component {
         <div className="banner">
           <div className="container">
 
-            <h1>{this.props.project.title} <i className="ion-ios-lightbulb-outline"></i></h1>
+            <h1><i className="ion-ios-lightbulb-outline"></i> {this.props.project.title}</h1>
             <ProjectMeta
               project={this.props.project}
               canModify={canModify} />

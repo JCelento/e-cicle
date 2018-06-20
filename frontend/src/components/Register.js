@@ -33,6 +33,7 @@ class Register extends React.Component {
     super();
     this.changeEmail = ev => this.props.onChangeEmail(ev.target.value);
     this.changePassword = ev => this.props.onChangePassword(ev.target.value);
+    this.changePasswordConfirmation = ev => this.props.onChangePasswordConfirmation(ev.target.value);
     this.changeUsername = ev => this.props.onChangeUsername(ev.target.value);
     this.submitForm = (username, email, password) => ev => {
       ev.preventDefault();
@@ -44,9 +45,23 @@ class Register extends React.Component {
     this.props.onUnload();
   }
 
+  checkRequired(value) {
+    return !!value.trim();
+}
+
+checkPasswordsMatch(value) {
+    var match = this.props.password === value;
+    this.setState({
+        valid: match,
+        password: value
+    });
+    return match;
+}
+
   render() {
     const email = this.props.email;
     const password = this.props.password;
+    const passwordConfirmation = this.props.passwordConfirmation;
     const username = this.props.username;
 
     return (
@@ -92,6 +107,17 @@ class Register extends React.Component {
                       placeholder="Senha"
                       value={this.props.password}
                       onChange={this.changePassword} />
+                  </fieldset>
+
+                  <fieldset className="form-group">
+                    <input
+                      className="form-control form-control-lg"
+                      type="password"
+                      placeholder="Confirme sua senha"
+                      value={this.props.passwordConfirmation}
+                      errorMessage="Passwords do not match"
+                      validate={this.checkPasswordsMatch}
+                      onChange={this.changePasswordConfirmation} />
                   </fieldset>
 
                   <button

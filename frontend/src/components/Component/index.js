@@ -41,7 +41,7 @@ class Component extends React.Component {
         <div className="banner">
           <div className="container">
           <div className="col-xs-12">
-            <h1>{this.props.component.componentId} <i className="ion-ios-cog-outline"></i></h1>
+            <h1> <i className="ion-ios-cog-outline"></i> {this.props.component.componentId}</h1>
             <ComponentMeta
               component={this.props.component}
               canModify={canModify} />
