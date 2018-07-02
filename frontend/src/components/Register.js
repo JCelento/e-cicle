@@ -20,8 +20,8 @@ const mapDispatchToProps = dispatch => ({
     dispatch({ type: UPDATE_FIELD_AUTH, key: 'password', value }),    
   onChangeUsername: value =>
     dispatch({ type: UPDATE_FIELD_AUTH, key: 'username', value }),
-  onSubmit: (username, email, password) => {
-    const payload = agent.Auth.register(username, email, password);
+  onSubmit: (username, email, password, passwordConfirmation) => {
+    const payload = agent.Auth.register(username, email, password, passwordConfirmation);
     dispatch({ type: REGISTER, payload })
   },
   onUnload: () =>
@@ -35,9 +35,9 @@ class Register extends React.Component {
     this.changePassword = ev => this.props.onChangePassword(ev.target.value);
     this.changePasswordConfirmation = ev => this.props.onChangePasswordConfirmation(ev.target.value);
     this.changeUsername = ev => this.props.onChangeUsername(ev.target.value);
-    this.submitForm = (username, email, password) => ev => {
+    this.submitForm = (username, email, password, passwordConfirmation) => ev => {
       ev.preventDefault();
-      this.props.onSubmit(username, email, password);
+      this.props.onSubmit(username, email, password, passwordConfirmation);
     }
   }
 
@@ -79,7 +79,7 @@ checkPasswordsMatch(value) {
 
               <ListErrors errors={this.props.errors} />
 
-              <form onSubmit={this.submitForm(username, email, password)}>
+              <form onSubmit={this.submitForm(username, email, password, passwordConfirmation)}>
                 <fieldset>
 
                   <fieldset className="form-group">

@@ -23,15 +23,25 @@ namespace EletronicPartsCatalog.Features.Users
             public string Email { get; set; }
 
             public string Password { get; set; }
+
+            public string PasswordConfirmation { get; set; }
+
         }
 
         public class UserDataValidator : AbstractValidator<UserData>
         {
             public UserDataValidator()
             {
-                RuleFor(x => x.Username).NotNull().NotEmpty();
-                RuleFor(x => x.Email).NotNull().NotEmpty();
-                RuleFor(x => x.Password).NotNull().NotEmpty();
+                RuleFor(x => x.Username).NotNull().WithMessage(" O campo username não pode ser nulo.");
+                RuleFor(x => x.Username).NotEmpty().WithMessage(" O campo username deve ser preenchido.");
+                RuleFor(x => x.Email).NotNull().WithMessage(" O campo e-mail não pode ser nulo.");
+                RuleFor(x => x.Email).NotEmpty().WithMessage(" O campo de e-mail deve ser preenchido.");
+                RuleFor(x => x.Email).EmailAddress().WithMessage(" O campo e-mail deve ser um endereço de email valido.");
+                RuleFor(x => x.Password).NotNull().WithMessage(" O campo senha não pode ser nulo.");
+                RuleFor(x => x.Password).NotEmpty().WithMessage(" O campo de senha deve ser preechido.");
+                RuleFor(x => x.PasswordConfirmation).NotNull().WithMessage(" O campo username não pode ser nulo.");
+                RuleFor(x => x.PasswordConfirmation).NotEmpty().WithMessage(" O campo de confirmação de senha deve ser preenchido.");
+                RuleFor(x => x.PasswordConfirmation).Matches(a => a.Password).WithMessage(" A senha e a confirmação devem ser iguais.");
             }
         }
 

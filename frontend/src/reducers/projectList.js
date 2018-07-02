@@ -4,6 +4,7 @@ import {
   SET_PAGE,
   APPLY_TAG_FILTER,
   APPLY_SEARCH_FILTER,
+  APPLY_COMPONENT_FILTER,
   HOME_PAGE_LOADED,
   HOME_PAGE_UNLOADED,
   CHANGE_TAB,
@@ -47,7 +48,7 @@ export default (state = {}, action) => {
         tag: action.tag,
         currentPage: 0
       };
-      case APPLY_SEARCH_FILTER:
+    case APPLY_SEARCH_FILTER:
       return {
         ...state,
         pager: action.pager,
@@ -55,6 +56,16 @@ export default (state = {}, action) => {
         projectsCount: action.payload.projectsCount,
         tab: null,
         search: action.search,
+        currentPage: 0
+      };
+    case APPLY_COMPONENT_FILTER:
+      return {
+        ...state,
+        pager: action.pager,
+        projects: action.payload.projects,
+        projectsCount: action.payload.projectsCount,
+        tab: null,
+        component: action.component.componentId,
         currentPage: 0
       };
     case HOME_PAGE_LOADED:

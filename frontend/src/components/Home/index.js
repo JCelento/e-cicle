@@ -11,7 +11,8 @@ import {
   HOME_PAGE_LOADED,
   HOME_PAGE_UNLOADED,
   APPLY_TAG_FILTER,
-  APPLY_SEARCH_FILTER
+  APPLY_SEARCH_FILTER,
+  APPLY_COMPONENT_FILTER
 } from '../../constants/actionTypes';
 
 const Promise = global.Promise;
@@ -26,7 +27,7 @@ const mapDispatchToProps = dispatch => ({
   onClickTag: (tag, pager, payload) =>
     dispatch({ type: APPLY_TAG_FILTER, tag, pager, payload }),
   onClickComponent: (component, pager, payload) =>
-    dispatch({ type: APPLY_SEARCH_FILTER, component, pager, payload }),
+    dispatch({ type: APPLY_COMPONENT_FILTER, component, pager, payload }),
   onLoad: (tab, pager, payload) =>
     dispatch({ type: HOME_PAGE_LOADED, tab, pager, payload }),
   onUnload: () =>
@@ -35,10 +36,10 @@ const mapDispatchToProps = dispatch => ({
 
 class Home extends React.Component {
   componentWillMount() {
-    const tab = this.props.token ? 'feed' : 'all';
+    const tab = this.props.token ?  'all' : 'feed';
     const projectsPromise = this.props.token ?
-      agent.Projects.feed :
-      agent.Projects.all;
+      agent.Projects.all :
+      agent.Projects.feed;
 
     this.props.onLoad(tab, projectsPromise, Promise.all([agent.Tags.getAll(), agent.Components.all(), projectsPromise()]));
   }

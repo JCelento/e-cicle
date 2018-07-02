@@ -10,7 +10,7 @@ const Components = props => {
           components.map(component => {
             const handleClick = ev => {
               ev.preventDefault();
-              props.onClickComponent(component, page => agent.Projects.bySearch(component.componentId, page), agent.Projects.bySearch(component.componentId));
+              props.onClickComponent(component, page => agent.Projects.byComponent(component.componentId, page), agent.Projects.byComponent(component.componentId));
             };
 
             return (

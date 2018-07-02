@@ -63,7 +63,7 @@ const ComponentFilterTab = props => {
   return (
     <li className="nav-item">
       <a href="" className="nav-link active">
-        <i className="ion-pound"></i> {props.component}
+        <i className="ion-ios-cog"></i> {props.component}
       </a>
     </li>
   );
