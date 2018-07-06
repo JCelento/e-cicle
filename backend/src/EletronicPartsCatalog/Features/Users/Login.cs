@@ -16,7 +16,7 @@ namespace EletronicPartsCatalog.Features.Users
     {
         public class UserData
         {
-            public string Email { get; set; }
+            public string EmailOrUsername { get; set; }
 
             public string Password { get; set; }
         }
@@ -25,7 +25,7 @@ namespace EletronicPartsCatalog.Features.Users
         {
             public UserDataValidator()
             {
-                RuleFor(x => x.Email).NotNull().NotEmpty();
+                RuleFor(x => x.EmailOrUsername).NotNull().NotEmpty();
                 RuleFor(x => x.Password).NotNull().NotEmpty();
             }
         }
@@ -60,7 +60,7 @@ namespace EletronicPartsCatalog.Features.Users
 
             public async Task<UserEnvelope> Handle(Command message, CancellationToken cancellationToken)
             {
-                var person = await _context.Persons.Where(x => x.Email == message.User.Email).SingleOrDefaultAsync(cancellationToken);
+                var person = await _context.Persons.Where(x => x.Email == message.User.EmailOrUsername || x.Username == message.User.EmailOrUsername).SingleOrDefaultAsync(cancellationToken);
                 if (person == null)
                 {
                     throw new RestException(HttpStatusCode.Unauthorized);

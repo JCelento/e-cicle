@@ -12,12 +12,12 @@ import {
 const mapStateToProps = state => ({ ...state.auth });
 
 const mapDispatchToProps = dispatch => ({
-  onChangeEmail: value =>
-    dispatch({ type: UPDATE_FIELD_AUTH, key: 'email', value }),
+  onChangeEmailOrUsername: value =>
+    dispatch({ type: UPDATE_FIELD_AUTH, key: 'emailOrUsername', value }),
   onChangePassword: value =>
     dispatch({ type: UPDATE_FIELD_AUTH, key: 'password', value }),
-  onSubmit: (email, password) =>
-    dispatch({ type: LOGIN, payload: agent.Auth.login(email, password) }),
+  onSubmit: (emailOrUsername, password) =>
+    dispatch({ type: LOGIN, payload: agent.Auth.login(emailOrUsername, password) }),
   onUnload: () =>
     dispatch({ type: LOGIN_PAGE_UNLOADED })
 });
@@ -25,11 +25,11 @@ const mapDispatchToProps = dispatch => ({
 class Login extends React.Component {
   constructor() {
     super();
-    this.changeEmail = ev => this.props.onChangeEmail(ev.target.value);
+    this.changeEmailOrUsername = ev => this.props.onChangeEmailOrUsername(ev.target.value);
     this.changePassword = ev => this.props.onChangePassword(ev.target.value);
-    this.submitForm = (email, password) => ev => {
+    this.submitForm = (emailOrUsername, password) => ev => {
       ev.preventDefault();
-      this.props.onSubmit(email, password);
+      this.props.onSubmit(emailOrUsername, password);
     };
   }
 
@@ -38,7 +38,7 @@ class Login extends React.Component {
   }
 
   render() {
-    const email = this.props.email;
+    const emailOrUsername = this.props.emailOrUsername;
     const password = this.props.password;
     return (
       <div className="auth-page">
@@ -55,16 +55,16 @@ class Login extends React.Component {
 
               <ListErrors errors={this.props.errors} />
 
-              <form onSubmit={this.submitForm(email, password)}>
+              <form onSubmit={this.submitForm(emailOrUsername, password)}>
                 <fieldset>
 
                   <fieldset className="form-group">
                     <input
                       className="form-control form-control-lg"
-                      type="email"
-                      placeholder="Email"
-                      value={email}
-                      onChange={this.changeEmail} />
+                      type="text"
+                      placeholder="Email ou Username"
+                      value={emailOrUsername}
+                      onChange={this.changeEmailOrUsername} />
                   </fieldset>
 
                   <fieldset className="form-group">

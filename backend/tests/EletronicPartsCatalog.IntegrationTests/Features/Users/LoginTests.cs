@@ -26,7 +26,7 @@ namespace EletronicPartsCatalog.IntegrationTests.Features.Users
             {
                 User = new Login.UserData()
                 {
-                    Email = "email",
+                    EmailOrUsername = "email",
                     Password = "password"
                 }
             };
@@ -34,7 +34,7 @@ namespace EletronicPartsCatalog.IntegrationTests.Features.Users
             var user = await SendAsync(command);
 
             Assert.NotNull(user?.User);
-            Assert.Equal(user.User.Email, command.User.Email);
+            Assert.Equal(user.User.Email, command.User.EmailOrUsername);
             Assert.Equal("username", user.User.Username);
             Assert.NotNull(user.User.Token);
         }
