@@ -20,18 +20,19 @@ const CommentContainer = props => {
     );
   } else {
     return (
+      <div className="col-xs-12 col-md-8 offset-md-2">
+       <CommentList
+          comments={props.comments}
+          slug={props.slug}
+          currentUser={props.currentUser} />
       <div className="col-xs-12 offset-md-5">
         <p>
           <Link to="/login">Faça Login</Link>
           &nbsp;ou&nbsp;
           <Link to="/register">Cadastre-se</Link>
         </p>
-
-        <CommentList
-          comments={props.comments}
-          slug={props.slug}
-          currentUser={props.currentUser} />
-      </div>
+        </div>
+        </div>
     );
   }
 };

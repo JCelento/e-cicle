@@ -7,7 +7,8 @@ import {
   FOLLOW_USER,
   UNFOLLOW_USER,
   PROFILE_PAGE_LOADED,
-  PROFILE_PAGE_UNLOADED
+  PROFILE_PAGE_UNLOADED,
+  LOGOUT
 } from '../constants/actionTypes';
 
 const EditProfileSettings = props => {
@@ -15,9 +16,9 @@ const EditProfileSettings = props => {
     return (
       <Link
         to="/settings"
-        className="btn btn-sm btn-outline-secondary action-btn">
+        className="btn btn-sm btn-outline-secondary action-btn pull-xs-left">
         <i className="ion-gear-a"></i> Alterar configurações de perfil
-      </Link>
+      </Link>     
     );
   }
   return null;
@@ -66,6 +67,7 @@ const mapDispatchToProps = dispatch => ({
     type: FOLLOW_USER,
     payload: agent.Profile.follow(username)
   }),
+  onClickLogout: () => dispatch({ type: LOGOUT }),
   onLoad: payload => dispatch({ type: PROFILE_PAGE_LOADED, payload }),
   onUnfollow: username => dispatch({
     type: UNFOLLOW_USER,
@@ -128,6 +130,12 @@ class Profile extends React.Component {
                 <img src={profile.image} className="user-img" alt={profile.username} />
                 <h4>{profile.username}</h4>
                 <p>{profile.bio}</p>
+
+              <button
+                className="btn btn-sm btn-danger pull-xs-right"
+                onClick={this.props.onClickLogout}>
+                <i className="ios-exit"></i> Logout
+              </button>
 
                 <EditProfileSettings isUser={isUser} />
                 <FollowUserButton

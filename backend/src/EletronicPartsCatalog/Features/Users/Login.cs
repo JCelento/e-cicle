@@ -16,7 +16,7 @@ namespace EletronicPartsCatalog.Features.Users
     {
         public class UserData
         {
-            public string Email { get; set; }
+            public string EmailOrUsername { get; set; }
 
             public string Password { get; set; }
         }
@@ -25,8 +25,10 @@ namespace EletronicPartsCatalog.Features.Users
         {
             public UserDataValidator()
             {
-                RuleFor(x => x.Email).NotNull().NotEmpty();
-                RuleFor(x => x.Password).NotNull().NotEmpty();
+                RuleFor(x => x.EmailOrUsername).NotEmpty().WithMessage(" O campo username/email deve ser preenchido.");
+                RuleFor(x => x.EmailOrUsername).NotNull().WithMessage(" Username/email é obrigatório.");
+                RuleFor(x => x.Password).NotNull().WithMessage(" A senha é obrigatória.");
+                RuleFor(x => x.Password).NotEmpty().WithMessage(" O campo senha deve ser preenchido."); 
             }
         }
 
@@ -60,15 +62,15 @@ namespace EletronicPartsCatalog.Features.Users
 
             public async Task<UserEnvelope> Handle(Command message, CancellationToken cancellationToken)
             {
-                var person = await _context.Persons.Where(x => x.Email == message.User.Email).SingleOrDefaultAsync(cancellationToken);
+                var person = await _context.Persons.Where(x => x.Email == message.User.EmailOrUsername || x.Username == message.User.EmailOrUsername).SingleOrDefaultAsync(cancellationToken);
                 if (person == null)
                 {
-                    throw new RestException(HttpStatusCode.Unauthorized);
+                    throw new RestException(HttpStatusCode.Unauthorized, new { User = "Username/email invalido." });
                 }
 
                 if (!person.Hash.SequenceEqual(_passwordHasher.Hash(message.User.Password, person.Salt)))
                 {
-                    throw new RestException(HttpStatusCode.Unauthorized);
+                    throw new RestException(HttpStatusCode.Unauthorized, new { User = "Senha invalida." });
                 }
              
                 var user  = _mapper.Map<Api.Domain.Person, User>(person);

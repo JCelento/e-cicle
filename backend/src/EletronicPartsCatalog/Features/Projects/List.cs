@@ -13,7 +13,7 @@ namespace EletronicPartsCatalog.Features.Projects
     {
         public class Query : IRequest<ProjectsEnvelope>
         {
-            public Query(string tag, string author, string favorited, string search, int? limit, int? offset)
+            public Query(string tag, string author, string favorited, string search, string component, int? limit, int? offset)
             {
                 Tag = tag;
                 Author = author;
@@ -21,6 +21,7 @@ namespace EletronicPartsCatalog.Features.Projects
                 Limit = limit;
                 Offset = offset;
                 Search = search;
+                Component = component;
             }
 
             public string Tag { get; }
@@ -30,6 +31,7 @@ namespace EletronicPartsCatalog.Features.Projects
             public int? Offset { get; }
             public bool IsFeed { get; set; }
             public string Search { get; set; }
+            public string Component { get; set; }
 
         }
 
@@ -77,6 +79,20 @@ namespace EletronicPartsCatalog.Features.Projects
                         return new ProjectsEnvelope();
                     }
                 }
+
+                if (!string.IsNullOrWhiteSpace(message.Component))
+                {
+                    var component = await _context.ProjectComponents.FirstOrDefaultAsync(x => x.ComponentId == message.Component, cancellationToken);
+                    if (component != null)
+                    {
+                        queryable = queryable.Where(x => x.ProjectComponents.Select(y => y.ComponentId).Contains(component.ComponentId));
+                    }
+                    else
+                    {
+                        return new ProjectsEnvelope();
+                    }
+                }
+
                 if (!string.IsNullOrWhiteSpace(message.Author))
                 {
                     var author = await _context.Persons.FirstOrDefaultAsync(x => x.Username == message.Author, cancellationToken);
@@ -126,7 +142,8 @@ namespace EletronicPartsCatalog.Features.Projects
                     return queryable.
                     Where((c) => c.Title.ToLower().Contains(q.ToLower()) 
                     || c.Author.Username.ToLower().Contains(q.ToLower())
-                    || c.ProjectTags.Any(x => x.TagId.ToLower().Contains(q.ToLower())))
+                    || c.ProjectTags.Any(x => x.TagId.ToLower().Contains(q.ToLower())
+                    || c.ProjectComponents.Any(z => z.ComponentId.ToLower().Contains(q.ToLower()))))
                     .OrderBy((o) => o.Title);
                 
             }

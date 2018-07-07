@@ -41,10 +41,18 @@ export default (state = defaultState, action) => {
     case LOGOUT:
       return { ...state, redirectTo: '/', token: null, currentUser: null };
     case PROJECT_SUBMITTED:
-      const redirectUrlProj = `/project/${action.payload.project.slug}`;
+      var redirectUrlProj =  `/editor/`;
+    
+      if(action.payload.project != null)
+        redirectUrlProj = `/project/${action.payload.project.slug}`;
+      
       return { ...state, redirectTo: redirectUrlProj };
     case COMPONENT_SUBMITTED:
-      const redirectUrlComp = `/component/${action.payload.component.slug}`;
+      var redirectUrlComp=  `/editor-component/`;
+
+      if(action.payload.component != null)
+        redirectUrlComp = `/component/${action.payload.component.slug}`;
+
       return { ...state, redirectTo: redirectUrlComp };
     case SETTINGS_SAVED:
       return {

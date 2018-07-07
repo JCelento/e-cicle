@@ -50,7 +50,7 @@ namespace EletronicPartsCatalog.Features.Followers
 
                 if (target == null)
                 {
-                    throw new RestException(HttpStatusCode.NotFound);
+                    throw new RestException(HttpStatusCode.NotFound, new { Target = "Target not found." });
                 }
                 
                 var observer = await _context.Persons.FirstOrDefaultAsync(x => x.Username == _currentUserAccessor.GetCurrentUsername(), cancellationToken);

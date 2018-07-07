@@ -29,10 +29,10 @@ const requests = {
 const Auth = {
   current: () =>
     requests.get('/user'),
-  login: (email, password) =>
-    requests.post('/users/login', { user: { email, password } }),
-  register: (username, email, password) =>
-    requests.post('/users', { user: { username, email, password } }),
+  login: (emailOrUsername, password) =>
+    requests.post('/users/login', { user: { emailOrUsername, password } }),
+  register: (username, email, password, passwordConfirmation) =>
+    requests.post('/users', { user: { username, email, password, passwordConfirmation } }),
   save: user =>
     requests.put('/user', { user })
 };
@@ -49,7 +49,9 @@ const Projects = {
   all: page =>
     requests.get(`/projects?${limit(10, page)}`),
   bySearch: (search, page) => 
-    requests.get(`/projects?search=${encode(search)}&${limit(10, page)}`),  
+    requests.get(`/projects?search=${encode(search)}&${limit(10, page)}`), 
+  byComponent: (component, page) => 
+    requests.get(`/projects?component=${encode(component)}&${limit(10, page)}`), 
   byAuthor: (author, page) =>
     requests.get(`/projects?author=${encode(author)}&${limit(5, page)}`),
   byTag: (tag, page) =>

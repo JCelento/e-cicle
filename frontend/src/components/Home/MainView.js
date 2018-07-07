@@ -4,6 +4,23 @@ import agent from '../../agent';
 import { connect } from 'react-redux';
 import { CHANGE_TAB } from '../../constants/actionTypes';
 
+const GlobalFeedTab = props => {
+  const clickHandler = ev => {
+    ev.preventDefault();
+    props.onTabClick('all', agent.Projects.all, agent.Projects.all());
+  };
+  return (
+    <li className="nav-item">
+      <a
+        href=""
+        className={ props.tab === 'all' ? 'nav-link active' : 'nav-link' }
+        onClick={clickHandler}>
+        Feed Global
+      </a>
+    </li>
+  );
+};
+
 const YourFeedTab = props => {
   if (props.token) {
     const clickHandler = ev => {
@@ -22,23 +39,6 @@ const YourFeedTab = props => {
     );
   }
   return null;
-};
-
-const GlobalFeedTab = props => {
-  const clickHandler = ev => {
-    ev.preventDefault();
-    props.onTabClick('all', agent.Projects.all, agent.Projects.all());
-  };
-  return (
-    <li className="nav-item">
-      <a
-        href=""
-        className={ props.tab === 'all' ? 'nav-link active' : 'nav-link' }
-        onClick={clickHandler}>
-        Feed Global
-      </a>
-    </li>
-  );
 };
 
 const TagFilterTab = props => {
@@ -63,7 +63,7 @@ const ComponentFilterTab = props => {
   return (
     <li className="nav-item">
       <a href="" className="nav-link active">
-        <i className="ion-pound"></i> {props.component}
+        <i className="ion-ios-cog"></i> {props.component}
       </a>
     </li>
   );
@@ -86,12 +86,12 @@ const MainView = props => {
       <div className="feed-toggle">
         <ul className="nav nav-pills outline-active">
 
+         <GlobalFeedTab tab={props.tab} onTabClick={props.onTabClick} />
+
           <YourFeedTab
             token={props.token}
             tab={props.tab}
             onTabClick={props.onTabClick} />
-
-          <GlobalFeedTab tab={props.tab} onTabClick={props.onTabClick} />
 
           <TagFilterTab tag={props.tag} />
 

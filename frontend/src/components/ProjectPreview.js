@@ -59,20 +59,22 @@ const ProjectPreview = props => {
       </div>
 
       <Link to={`/project/${project.slug}`} className="preview-link"/>
-        <h1>{project.title}</h1>
+        <h1><i className="ion-ios-lightbulb-outline"></i> {project.title}</h1>
         <div className="project-meta">
         <Link to={`project/${project.slug}`}>
           <img src={project.projectImage} alt={project.slug} width="500px"/>
         </Link>
         </div>
         <p>{project.description}</p>
-        <span>Continue lendo... </span>
+        <Link to={`project/${project.slug}`}>
+          Continue lendo... 
+          </Link>
         <ul className="tag-list">
           {
             project.tagList.map(tag => {
               return (
                 <li className="tag-default tag-pill tag-outline" key={tag}>
-                  {tag}
+                  <i className="ion-ios-pricetag-outline"></i> {tag}
                 </li>
               )
             })
@@ -84,7 +86,7 @@ const ProjectPreview = props => {
               return (
                 <Link to={`/component/${slugfy(component)}`} className="preview-link" key={slugfy(component)}>
                 <li className="tag-default tag-pill tag-primary" key={component}>
-                  {component}
+                <i className="ion-ios-cog-outline"></i> {component}
                 </li>
                 </Link>
               )

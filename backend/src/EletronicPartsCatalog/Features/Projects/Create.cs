@@ -34,9 +34,12 @@ namespace EletronicPartsCatalog.Features.Projects
         {
             public ProjectDataValidator()
             {
-                RuleFor(x => x.Title).NotNull().NotEmpty();
-                RuleFor(x => x.Description).NotNull().NotEmpty();
-                RuleFor(x => x.Body).NotNull().NotEmpty();
+                RuleFor(x => x.Title).NotNull().WithMessage(" O titulo do projeto é obrigatório.");
+                RuleFor(x => x.Title).NotEmpty().WithMessage(" O campo titulo deve ser preenchido.");
+                RuleFor(x => x.Description).NotNull().WithMessage(" A descrição do projeto é obrigatória");
+                RuleFor(x => x.Description).NotEmpty().WithMessage(" O campo descrição deve ser preenchido."); ;
+                RuleFor(x => x.Body).NotNull().WithMessage(" Uma definição do projeto é obrigatória.");
+                RuleFor(x => x.Body).NotEmpty().WithMessage(" A definição do projeto deve ser preenchida."); ;
             }
         }
 

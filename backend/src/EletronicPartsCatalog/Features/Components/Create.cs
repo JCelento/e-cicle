@@ -29,8 +29,11 @@ namespace EletronicPartsCatalog.Features.Components
         {
             public ComponentDataValidator()
             {
-                RuleFor(x => x.Name).NotNull().NotEmpty();
-                RuleFor(x => x.WhereToFindItList).NotNull().NotEmpty();
+                RuleFor(x => x.Name).NotNull().WithMessage(" O nome do componente é obrigatório.");
+                RuleFor(x => x.Name).NotEmpty().WithMessage(" O campo nome deve ser preenchido."); ;
+                RuleFor(x => x.WhereToFindItList).NotNull()
+                    .WithMessage(" A indicação de onde conseguir o componente é obrigatória.");
+                RuleFor(x => x.WhereToFindItList).NotEmpty().WithMessage(" O campo de onde conseguir o componente deve ser preenchido."); ;
             }
         }
 

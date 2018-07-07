@@ -31,7 +31,7 @@ namespace EletronicPartsCatalog.Features.Profiles
 
             if (person == null)
             {
-                throw new RestException(HttpStatusCode.NotFound);
+                throw new RestException(HttpStatusCode.NotFound, new { User = "User not found." });
             }
             var profile = _mapper.Map<Person, Profile>(person);
 

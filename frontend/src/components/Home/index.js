@@ -1,4 +1,5 @@
 import Banner from './Banner';
+import Description from './Description';
 import MainView from './MainView';
 import React from 'react';
 import Tags from './Tags';
@@ -10,7 +11,7 @@ import {
   HOME_PAGE_LOADED,
   HOME_PAGE_UNLOADED,
   APPLY_TAG_FILTER,
-  APPLY_SEARCH_FILTER
+  APPLY_COMPONENT_FILTER
 } from '../../constants/actionTypes';
 
 const Promise = global.Promise;
@@ -25,7 +26,7 @@ const mapDispatchToProps = dispatch => ({
   onClickTag: (tag, pager, payload) =>
     dispatch({ type: APPLY_TAG_FILTER, tag, pager, payload }),
   onClickComponent: (component, pager, payload) =>
-    dispatch({ type: APPLY_SEARCH_FILTER, component, pager, payload }),
+    dispatch({ type: APPLY_COMPONENT_FILTER, component, pager, payload }),
   onLoad: (tab, pager, payload) =>
     dispatch({ type: HOME_PAGE_LOADED, tab, pager, payload }),
   onUnload: () =>
@@ -34,10 +35,10 @@ const mapDispatchToProps = dispatch => ({
 
 class Home extends React.Component {
   componentWillMount() {
-    const tab = this.props.token ? 'feed' : 'all';
+    const tab = this.props.token ?  'all' : 'feed';
     const projectsPromise = this.props.token ?
-      agent.Projects.feed :
-      agent.Projects.all;
+      agent.Projects.all :
+      agent.Projects.feed;
 
     this.props.onLoad(tab, projectsPromise, Promise.all([agent.Tags.getAll(), agent.Components.all(), projectsPromise()]));
   }
@@ -52,6 +53,8 @@ class Home extends React.Component {
 
         <Banner token={this.props.token} appName={this.props.appName} />
 
+        <Description token={this.props.token}/>
+
         <div className="container page">
           <div className="row">
             <MainView />
@@ -61,15 +64,15 @@ class Home extends React.Component {
               
               <SearchBar />
 
-                <p>Tags Populares</p>
+                <p>Tags Populares <i className="ion-ios-pricetag-outline"></i></p>
 
                 <Tags
                   tags={this.props.tags}
                   onClickTag={this.props.onClickTag} />
 
                   
-                <p>Componentes Populares</p>
-
+                <p>Componentes Populares <i className="ion-ios-cog-outline"></i></p>
+                
                 <Components
                   components={this.props.components}
                   onClickComponent={this.props.onClickComponent} />

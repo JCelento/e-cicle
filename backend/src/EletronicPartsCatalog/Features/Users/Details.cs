@@ -43,7 +43,7 @@ namespace EletronicPartsCatalog.Features.Users
                     .FirstOrDefaultAsync(x => x.Username == message.Username, cancellationToken);
                 if (person == null)
                 {
-                    throw new RestException(HttpStatusCode.NotFound);
+                    throw new RestException(HttpStatusCode.NotFound, new { User = "User not found." });
                 }
                 return new UserEnvelope(_mapper.Map<Api.Domain.Person, User>(person));
             }

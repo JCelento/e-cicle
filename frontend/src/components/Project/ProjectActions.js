@@ -26,7 +26,7 @@ const ProjectActions = props => {
         
         &nbsp; &nbsp;
 
-        <button className="btn btn-outline-danger btn-sm" onClick={del}>
+        <button className="btn btn-danger btn-sm pull-xs-right" onClick={del}>
           <i className="ion-trash-a"></i> Deletar Projeto
         </button>
 
