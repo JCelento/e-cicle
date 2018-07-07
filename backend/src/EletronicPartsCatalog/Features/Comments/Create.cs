@@ -22,7 +22,8 @@ namespace EletronicPartsCatalog.Features.Comments
         {
             public CommentDataValidator()
             {
-                RuleFor(x => x.Body).NotNull().NotEmpty();
+                RuleFor(x => x.Body).NotNull().WithMessage(" O corpo do comentário é obrigatório.");
+                RuleFor(x => x.Body).NotEmpty().WithMessage(" O comentário deve ser preenchido");
             }
         }
 
@@ -60,7 +61,7 @@ namespace EletronicPartsCatalog.Features.Comments
 
                 if (Project == null)
                 {
-                    throw new RestException(HttpStatusCode.NotFound);
+                    throw new RestException(HttpStatusCode.NotFound, new {Project = "Project not found."});
                 }
 
                 var author = await _context.Persons.FirstAsync(x => x.Username == _currentUserAccessor.GetCurrentUsername(), cancellationToken);

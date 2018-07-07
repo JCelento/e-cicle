@@ -55,7 +55,7 @@ namespace EletronicPartsCatalog.Features.Projects
 
                 if (Project == null)
                 {
-                    throw new RestException(HttpStatusCode.NotFound);
+                    throw new RestException(HttpStatusCode.NotFound, new { Project = "Project not found." });
                 }
 
 

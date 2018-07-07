@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
@@ -33,11 +34,12 @@ namespace EletronicPartsCatalog.Features.Comments
             {
                 var Project = await _context.Projects
                     .Include(x => x.Comments)
+                    .ThenInclude(x => x.Author)
                     .FirstOrDefaultAsync(x => x.Slug == message.Slug, cancellationToken);
 
                 if (Project == null)
                 {
-                    throw new RestException(HttpStatusCode.NotFound);
+                    throw new RestException(HttpStatusCode.NotFound, new { Project = "Project not found." });
                 }
 
                 return new CommentsEnvelope(Project.Comments);

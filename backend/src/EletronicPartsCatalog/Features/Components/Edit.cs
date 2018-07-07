@@ -52,7 +52,7 @@ namespace EletronicPartsCatalog.Features.Components
 
                 if (component == null)
                 {
-                    throw new RestException(HttpStatusCode.NotFound);
+                    throw new RestException(HttpStatusCode.NotFound, new { Component = "Component not found." });
                 }
 
 

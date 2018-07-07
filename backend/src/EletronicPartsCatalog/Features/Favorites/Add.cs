@@ -48,7 +48,7 @@ namespace EletronicPartsCatalog.Features.Favorites
 
                 if (Project == null)
                 {
-                    throw new RestException(HttpStatusCode.NotFound);
+                    throw new RestException(HttpStatusCode.NotFound, new { Project = "Project not found." });
                 }
                 
                 var person = await _context.Persons.FirstOrDefaultAsync(x => x.Username == _currentUserAccessor.GetCurrentUsername(), cancellationToken);

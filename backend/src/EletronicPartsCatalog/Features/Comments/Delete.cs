@@ -49,13 +49,13 @@ namespace EletronicPartsCatalog.Features.Comments
 
                 if (Project == null)
                 {
-                    throw new RestException(HttpStatusCode.NotFound);
+                    throw new RestException(HttpStatusCode.NotFound, new { Project = "Project not found." });
                 }
 
                 var comment = Project.Comments.FirstOrDefault(x => x.CommentId == message.Id);
                 if (comment == null)
                 {
-                    throw new RestException(HttpStatusCode.NotFound);
+                    throw new RestException(HttpStatusCode.NotFound, new { Comment = "Comment not found." });
                 }
                 
                 _context.Comments.Remove(comment);
