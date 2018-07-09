@@ -15,6 +15,9 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.Swagger;
 using System.Collections.Generic;
+using System.IO;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace EletronicPartsCatalog
 {
@@ -30,10 +33,18 @@ namespace EletronicPartsCatalog
             services.AddMediatR();
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationPipelineBehavior<,>));
 
-            services
-                .AddEntityFrameworkSqlite()
-                .AddDbContext<EletronicPartsCatalogContext>();
+            IConfigurationRoot configuration = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json", optional: true)
+            .Build();
+            var connectionString = configuration.GetConnectionString("Sql");
 
+            services.AddEntityFrameworkSqlServer().AddDbContext<EletronicPartsCatalogContext>(
+            options =>
+            {
+                options.UseSqlServer(connectionString);
+                options.EnableSensitiveDataLogging();
+            });
             services.AddLocalization(x => x.ResourcesPath = "Resources");
 
             // Inject an implementation of ISwaggerProvider with defaulted settings applied
@@ -80,7 +91,7 @@ namespace EletronicPartsCatalog
             services.AddScoped<ICurrentUserAccessor, CurrentUserAccessor>();
             services.AddScoped<IProfileReader, ProfileReader>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            
+
             services.AddJwt();
         }
 
@@ -110,7 +121,7 @@ namespace EletronicPartsCatalog
             {
                 x.SwaggerEndpoint("/swagger/v1/swagger.json", "eCicle API V1");
             });
-            
+
             app.ApplicationServices.GetRequiredService<EletronicPartsCatalogContext>().Database.EnsureCreated();
         }
     }

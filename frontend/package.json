@@ -5,9 +5,12 @@
   "private": true,
   "devDependencies": {
     "cross-env": "^5.1.4",
+    "electron-prebuilt-compile": "^2.0.4",
     "react-scripts": "1.1.1"
   },
   "dependencies": {
+    "electron-compile": "^6.4.3",
+    "electron-compilers": "^5.9.0",
     "history": "^4.6.3",
     "marked": "^0.3.6",
     "prop-types": "^15.5.10",
@@ -28,5 +31,6 @@
     "build": "react-scripts build",
     "test": "cross-env PORT=4100 react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  }
+  },
+  "main": "main.js"
 }

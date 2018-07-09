@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.IO;
+using EletronicPartsCatalog.Api.Infrastructure;
 
 namespace EletronicPartsCatalog.Infrastructure
 {
@@ -29,18 +30,6 @@ namespace EletronicPartsCatalog.Infrastructure
         public DbSet<ComponentWhereToFindIt> ComponentWhereToFindIt { get; set; }
         public DbSet<ProjectFavorite> ProjectFavorites { get; set; }
         public DbSet<FollowedPeople> FollowedPeople { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            IConfigurationRoot configuration = new ConfigurationBuilder()
-               .SetBasePath(Directory.GetCurrentDirectory())
-               .AddJsonFile("appsettings.json")
-               .Build();
-            var connectionString = configuration.GetConnectionString("Sql");
-            optionsBuilder.UseSqlServer(connectionString);
-            optionsBuilder.EnableSensitiveDataLogging();
-
-        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
