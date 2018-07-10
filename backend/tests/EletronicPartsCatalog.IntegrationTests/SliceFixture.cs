@@ -24,7 +24,7 @@ namespace EletronicPartsCatalog.IntegrationTests
                 .AddJsonFile("appsettings.json")
                 .Build();
             var builder = new DbContextOptionsBuilder<EletronicPartsCatalogContext>();
-            var connectionString = configuration.GetConnectionString("TestSql");
+            var connectionString = configuration.GetConnectionString("Test");
             builder.UseSqlServer(connectionString);
 
             services.AddSingleton(new EletronicPartsCatalogContext(builder.Options));

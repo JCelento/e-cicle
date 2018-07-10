@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{9F832627
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EletronicPartsCatalog.IntegrationTests", "tests\EletronicPartsCatalog.IntegrationTests\EletronicPartsCatalog.IntegrationTests.csproj", "{CFFDDBF0-5CDD-4D88-A82B-68CBF2432999}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EletronicPartsCatalog.UnitTests", "EletronicPartsCatalog.UnitTests\EletronicPartsCatalog.UnitTests.csproj", "{1F24F76F-841B-4B07-935C-9D3FAAD6BD4E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EletronicPartsCatalog.UnitTests", "EletronicPartsCatalog.UnitTests\EletronicPartsCatalog.UnitTests.csproj", "{1F24F76F-841B-4B07-935C-9D3FAAD6BD4E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
