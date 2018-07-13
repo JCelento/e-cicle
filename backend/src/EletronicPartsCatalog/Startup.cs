@@ -53,7 +53,7 @@ namespace EletronicPartsCatalog
                 x.AddSecurityDefinition("Bearer", new ApiKeyScheme
                 {
                     In = "header",
-                    Description = "Por favor inclua o JWT com Bearer no campo abaixo",
+                    Description = "Please enter the JWT token with Bearer",
                     Name = "Authorization",
                     Type = "apiKey"
                 });
