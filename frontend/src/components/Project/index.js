@@ -3,7 +3,9 @@ import CommentContainer from './CommentContainer';
 import React from 'react';
 import agent from '../../agent';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import marked from 'marked';
+import { slugfy } from '../../util.js';
 import { PROJECT_PAGE_LOADED, PROJECT_PAGE_UNLOADED } from '../../constants/actionTypes';
 
 const mapStateToProps = state => ({
@@ -48,6 +50,7 @@ class Project extends React.Component {
             <h1><i className="ion-ios-lightbulb-outline"></i> {this.props.project.title}</h1>
             <ProjectMeta
               project={this.props.project}
+              currentUser = {this.props.currentUser}
               canModify={canModify} />
           </div>
         </div>
@@ -84,11 +87,13 @@ class Project extends React.Component {
                 Componentes eletrônicos re-utilizados: <br/> {
                   this.props.project.componentList.map(component => {
                     return (
+                      <Link to={`/component/${slugfy(component)}`} className="preview-link" key={slugfy(component)}>
                       <li
                         className="tag-default tag-pill tag-primary"
                         key={component}>
                         <i className="ion-ios-cog-outline"></i> {component}
                       </li>
+                      </Link>
                     );
                   })
                 }

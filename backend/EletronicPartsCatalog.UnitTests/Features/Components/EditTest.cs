@@ -19,8 +19,9 @@ namespace EletronicPartsCatalog.UnitTests.Features.Components
         public async Task Edit_Inexistent_Project_WithValidInput_ShouldReturn_RestException()
         {
             var mockedContext = new EletronicPartsCatalogContextMock().GetMockedContextWithData();
+            var mockedCurrentUserAcessor = new Mock<ICurrentUserAccessor>();
 
-            var sut = new Edit.Handler(mockedContext);
+            var sut = new Edit.Handler(mockedContext, mockedCurrentUserAcessor.Object);
 
             var message = new Edit.Command
             {

@@ -17,6 +17,8 @@ namespace EletronicPartsCatalog.Api.Domain
         }
 
         public string Slug { get; set; }
+  
+        public Person Author { get; set; }
 
         public string ComponentId { get; set; }
 

@@ -137,6 +137,8 @@ class Profile extends React.Component {
                 <i className="ios-exit"></i> Logout
               </button>
 
+        &nbsp; &nbsp;
+
                 <EditProfileSettings isUser={isUser} />
                 <FollowUserButton
                   isUser={isUser}

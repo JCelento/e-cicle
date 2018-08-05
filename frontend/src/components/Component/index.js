@@ -44,7 +44,8 @@ class Component extends React.Component {
             <h1> <i className="ion-ios-cog-outline"></i> {this.props.component.componentId}</h1>
             <ComponentMeta
               component={this.props.component}
-              canModify={canModify} />
+              canModify={canModify}
+              />
       </div>
           </div>
         </div>

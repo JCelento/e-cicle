@@ -39,14 +39,18 @@ namespace EletronicPartsCatalog.Features.Components
         {
             private readonly EletronicPartsCatalogContext _context;
 
-            public Handler(EletronicPartsCatalogContext context)
+            private readonly ICurrentUserAccessor _currentUserAccessor;
+
+            public Handler(EletronicPartsCatalogContext context, ICurrentUserAccessor currentUserAccessor)
             {
                 _context = context;
+                _currentUserAccessor = currentUserAccessor;
             }
 
             public async Task<ComponentEnvelope> Handle(Command message, CancellationToken cancellationToken)
             {
                 var component = await _context.Components
+                    .Include(x => x.Author)
                     .Where(x => x.Slug == message.Slug)
                     .FirstOrDefaultAsync(cancellationToken);
 
@@ -55,6 +59,10 @@ namespace EletronicPartsCatalog.Features.Components
                     throw new RestException(HttpStatusCode.NotFound, new { Component = "Component not found." });
                 }
 
+                if (component.Author.Username != _currentUserAccessor.GetCurrentUsername())
+                {
+                    throw new RestException(HttpStatusCode.Unauthorized, new { Project = "Components can only be altered by its owner." });
+                }
 
                 component.ComponentImage = message.Component.ComponentImage ?? component.ComponentImage;
                 component.Description = message.Component.Description ?? component.Description;

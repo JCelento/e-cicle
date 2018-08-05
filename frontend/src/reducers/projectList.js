@@ -77,7 +77,7 @@ export default (state = {}, action) => {
         projects: action.payload[2].projects,
         projectsCount: action.payload[2].projectsCount,
         currentPage: 0,
-        tab: action.tab
+        tab: 'all'
       };
     case HOME_PAGE_UNLOADED:
     return { ...state, viewChangeCounter: state.viewChangeCounter + 1 };

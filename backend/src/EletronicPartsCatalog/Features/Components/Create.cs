@@ -8,6 +8,7 @@ using EletronicPartsCatalog.Api.Resources.Images;
 using EletronicPartsCatalog.Infrastructure;
 using FluentValidation;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace EletronicPartsCatalog.Features.Components
 {
@@ -63,6 +64,8 @@ namespace EletronicPartsCatalog.Features.Components
 
             public async Task<ComponentEnvelope> Handle(Command message, CancellationToken cancellationToken)
             {
+                var author = await _context.Persons.FirstAsync(x => x.Username == _currentUserAccessor.GetCurrentUsername(), cancellationToken);
+
                 var whereToFindIt = new List<WhereToFindIt>();
                 foreach(var where in (message.Component.WhereToFindItList ?? Enumerable.Empty<string>()))
                 {
@@ -82,6 +85,7 @@ namespace EletronicPartsCatalog.Features.Components
                 var component = new Component()
                 {
                     ComponentId = message.Component.Name,
+                    Author = author,
                     CreatedAt = DateTime.UtcNow,
                     UpdatedAt = DateTime.UtcNow,
                     Description = message.Component.Description,

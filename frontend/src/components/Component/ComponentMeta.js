@@ -12,7 +12,7 @@ const ComponentMeta = props => {
         </span>
       </div>
 
-      <ComponentActions canModify={props.canModify} component={component} />
+      <ComponentActions canModify={props.canModify && props.canModify.username == component.author.username} component={component} />
     </div>
   );
 };

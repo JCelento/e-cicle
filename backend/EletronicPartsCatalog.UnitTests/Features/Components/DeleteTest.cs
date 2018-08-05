@@ -17,7 +17,9 @@ namespace EletronicPartsCatalog.UnitTests.Features.Components
         public async Task Delete_Component_Inexistent_ShouldReturn_RestException()
         {
             var mockedContext = new EletronicPartsCatalogContextMock().GetMockedContextWithData();
-            var sut = new Delete.QueryHandler(mockedContext);
+            var mockedCurrentUserAcessor = new Mock<ICurrentUserAccessor>();
+
+            var sut = new Delete.QueryHandler(mockedContext, mockedCurrentUserAcessor.Object);
             var message = new Delete.Command("slug");
 
             await Assert.ThrowsAsync<RestException>(() => sut.Handle(message, CancellationToken.None));

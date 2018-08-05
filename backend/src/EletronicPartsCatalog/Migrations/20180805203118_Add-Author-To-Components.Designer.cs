@@ -11,9 +11,10 @@ using System;
 namespace EletronicPartsCatalog.Api.Migrations
 {
     [DbContext(typeof(EletronicPartsCatalogContext))]
-    partial class EletronicPartsCatalogContextModelSnapshot : ModelSnapshot
+    [Migration("20180805203118_Add-Author-To-Components")]
+    partial class AddAuthorToComponents
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
