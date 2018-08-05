@@ -41,15 +41,18 @@ namespace EletronicPartsCatalog.Features.Projects
         public class Handler : IRequestHandler<Command, ProjectEnvelope>
         {
             private readonly EletronicPartsCatalogContext _context;
+            private readonly ICurrentUserAccessor _currentUserAccessor;
 
-            public Handler(EletronicPartsCatalogContext context)
+            public Handler(EletronicPartsCatalogContext context, ICurrentUserAccessor currentUserAccessor)
             {
                 _context = context;
+                _currentUserAccessor = currentUserAccessor;
             }
 
             public async Task<ProjectEnvelope> Handle(Command message, CancellationToken cancellationToken)
             {
                 var Project = await _context.Projects
+                    .Include(x => x.Author)
                     .Where(x => x.Slug == message.Slug)
                     .FirstOrDefaultAsync(cancellationToken);
 
@@ -58,6 +61,10 @@ namespace EletronicPartsCatalog.Features.Projects
                     throw new RestException(HttpStatusCode.NotFound, new { Project = "Project not found." });
                 }
 
+                if (Project.Author.Username != _currentUserAccessor.GetCurrentUsername())
+                {
+                    throw new RestException(HttpStatusCode.Unauthorized, new { Project = "Projects can only be altered by its owner." });
+                }
 
                 Project.Description = message.Project.Description ?? Project.Description;
                 Project.Body = message.Project.Body ?? Project.Body;

@@ -10,6 +10,7 @@ namespace EletronicPartsCatalog.Features.Components
         {
             return Components
                 .Include(x => x.ComponentWhereToFindIt)
+                .Include(x => x.Author)
                 .AsNoTracking();
         }
     }

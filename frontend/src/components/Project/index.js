@@ -50,6 +50,7 @@ class Project extends React.Component {
             <h1><i className="ion-ios-lightbulb-outline"></i> {this.props.project.title}</h1>
             <ProjectMeta
               project={this.props.project}
+              currentUser = {this.props.currentUser}
               canModify={canModify} />
           </div>
         </div>

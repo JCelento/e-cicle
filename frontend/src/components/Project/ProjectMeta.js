@@ -5,6 +5,7 @@ import { formatDate } from '../../util.js';
 
 const ProjectMeta = props => {
   const project = props.project;
+  const currentUser = props.currentUser;
   return (
     <div className="article-meta">
       <Link to={`/@${project.author.username}`}>
@@ -20,7 +21,7 @@ const ProjectMeta = props => {
         </span>
       </div>
 
-      <ProjectActions canModify={props.canModify} project={project} />
+      <ProjectActions canModify={props.canModify && currentUser.username == project.author.username} project={project} />
     </div>
   );
 };

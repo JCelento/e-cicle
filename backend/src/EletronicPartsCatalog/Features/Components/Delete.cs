@@ -33,19 +33,28 @@ namespace EletronicPartsCatalog.Features.Components
         {
             private readonly EletronicPartsCatalogContext _context;
 
-            public QueryHandler(EletronicPartsCatalogContext context)
+            private readonly ICurrentUserAccessor _currentUserAccessor;
+
+            public QueryHandler(EletronicPartsCatalogContext context, ICurrentUserAccessor currentUserAccessor)
             {
                 _context = context;
+                _currentUserAccessor = currentUserAccessor;
             }
 
             public async Task Handle(Command message, CancellationToken cancellationToken)
             {
                 var component = await _context.Components
+                    .Include(x => x.Author)
                     .FirstOrDefaultAsync(x => x.Slug == message.Slug, cancellationToken);
 
                 if (component == null)
                 {
                     throw new RestException(HttpStatusCode.NotFound , new { Component = "Component not found." });
+                }
+
+                if (component.Author.Username != _currentUserAccessor.GetCurrentUsername())
+                {
+                    throw new RestException(HttpStatusCode.Unauthorized, new { Project = "Components can only be deleted by its owner." });
                 }
 
                 _context.Components.Remove(component);

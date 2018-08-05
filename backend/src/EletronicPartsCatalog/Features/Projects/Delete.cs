@@ -32,20 +32,27 @@ namespace EletronicPartsCatalog.Features.Projects
         public class QueryHandler : IRequestHandler<Command>
         {
             private readonly EletronicPartsCatalogContext _context;
+            private readonly ICurrentUserAccessor _currentUserAccessor;
 
-            public QueryHandler(EletronicPartsCatalogContext context)
+            public QueryHandler(EletronicPartsCatalogContext context, ICurrentUserAccessor currentUserAccessor)
             {
                 _context = context;
+                _currentUserAccessor = currentUserAccessor;
             }
 
             public async Task Handle(Command message, CancellationToken cancellationToken)
             {
-                var Project = await _context.Projects
+                var Project = await _context.Projects.Include(x => x.Author)
                     .FirstOrDefaultAsync(x => x.Slug == message.Slug, cancellationToken);
 
                 if (Project == null)
                 {
                     throw new RestException(HttpStatusCode.NotFound, new { Project = "Project not found." });
+                }
+
+                if (Project.Author.Username != _currentUserAccessor.GetCurrentUsername())
+                {
+                    throw new RestException(HttpStatusCode.Unauthorized, new { Project = "Projects can only be deleted by its owner." });
                 }
 
                 _context.Projects.Remove(Project);
